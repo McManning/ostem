@@ -63,3 +63,25 @@ main {
 
     }
 }
+
+// Screwing around with putting buttons inside of input labels
+// (controlling button visibility based on input active)
+// Technically makes more sense if we just do :active for the parent
+// input so we don't have to be bound on the label...
+label {
+    width: 100%;
+    text-align: left;
+}
+
+label .btn {
+    position: absolute;
+    right: 2em;
+    top: 1em;
+    font-size: 1rem;
+    opacity: 0;
+}
+
+label.active .btn {
+    opacity: 1;
+}
+
