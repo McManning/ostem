@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+// Mixins
+@import "vendor/materialize";
+
+// Correction for sticky footer
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+// Correction for sticky footer
+main {
+    flex: 1 0 auto;
+}
+
+
+.parallax-container {
+    min-height: 380px;
+    height: auto;
+    color: rgba(255,255,255,.9);
+}
+
+.rainbow {
+    font-size: 0;
+
+    div {
+        display: inline-block;
+        width: 16%;
+        height: 6px;
+
+        &.red {
+            width: 18%;
+        }
+        &.purple {
+            width: 18%;
+        }
+    }
+}
+
+// Custom flow-text rule for flowing larger headers
+.flow-text.large {
+    font-weight: 300;
+    $i: 0;
+    @while $i <= $intervals {
+        @media only screen and (min-width : 360 + ($i * $interval-size)) {
+            font-size: 2rem * (1 + (.02 * $i));
+        }
+        $i: $i + 1;
+    }
+
+    // Handle below 360px screen
+    @media only screen and (max-width: 360px) {
+        font-size: 2rem;
+    }
+}
+
+.next-meeting {
+    .date, .location {
+        border-bottom: 1px dotted color('blue', 'lighten-1');
+        color: color('blue', 'lighten-2');
+
+    }
+}
