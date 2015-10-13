@@ -16,10 +16,11 @@ main {
 }
 
 
-.parallax-container {
-    min-height: 380px;
+.hero {
+    min-height: 600px;
     height: auto;
-    color: rgba(255,255,255,.9);
+    background: url('../img/union-softblur.jpg') no-repeat;
+    color: #FFF;
 }
 
 .rainbow {
@@ -83,5 +84,18 @@ label .btn {
 
 label.active .btn {
     opacity: 1;
+}
+
+
+// Temp content hacks for mailing list input labels.
+// I'll eventually be replacing the entire thing with something
+// a little more interesting.
+
+label[for="email2"]:before, label[for="email"]:before {
+    content: 'Click here to sign up for our mailing list';
+}
+
+label[for="email2"].active:before, label[for="email"].active:before {
+    content: 'Enter your email and click sign up';
 }
 

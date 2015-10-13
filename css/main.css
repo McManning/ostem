@@ -10447,10 +10447,11 @@ main {
   flex: 1 0 auto;
 }
 
-.parallax-container {
-  min-height: 380px;
+.hero {
+  min-height: 600px;
   height: auto;
-  color: rgba(255, 255, 255, 0.9);
+  background: url("../img/union-softblur.jpg") no-repeat;
+  color: #FFF;
 }
 
 .rainbow {
@@ -10602,6 +10603,14 @@ label .btn, label .btn-large {
 
 label.active .btn, label.active .btn-large {
   opacity: 1;
+}
+
+label[for="email2"]:before, label[for="email"]:before {
+  content: 'Click here to sign up for our mailing list';
+}
+
+label[for="email2"].active:before, label[for="email"].active:before {
+  content: 'Enter your email and click sign up';
 }
 
 /*# sourceMappingURL=main.css.map */
