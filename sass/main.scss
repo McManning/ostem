@@ -32,10 +32,8 @@ main {
         width: 16%;
         height: 6px;
 
-        &.red {
-            width: 18%;
-        }
-        &.purple {
+        // Expand the first and last colors to fill the screen
+        &:first-child, &:last-child {
             width: 18%;
         }
     }
@@ -62,8 +60,15 @@ main {
     padding-top: 2em;
 
     .date, .location {
-        border-bottom: 1px dotted color('blue', 'lighten-1');
-        color: color('blue', 'lighten-2');
+        border-bottom: 1px dotted color('osu-blue', 'darken-2');
+        color: color('osu-blue', 'darken-2');
+    }
+
+    &.inverted {
+        .date, .location {
+            border-bottom: 1px dotted color('osu-blue', 'lighten-2');
+            color: color('osu-blue', 'lighten-2');
+        }
     }
 }
 
@@ -122,6 +127,7 @@ label[for="email2"].active:before, label[for="email"].active:before {
 footer.page-footer {
     background: #333;
     color: #FFF;
+    margin-top: 0;
 
     a {
         color: #FFF;

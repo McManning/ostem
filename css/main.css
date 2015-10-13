@@ -1,3 +1,203 @@
+.osu-scarlet {
+  background-color: #bb0000 !important;
+}
+
+.osu-scarlet-text {
+  color: #bb0000 !important;
+}
+
+.osu-grey {
+  background-color: #666666 !important;
+}
+
+.osu-grey-text {
+  color: #666666 !important;
+}
+
+.osu-orange.lighten-5 {
+  background-color: #ebac94 !important;
+}
+
+.osu-orange-text.text-lighten-5 {
+  color: #ebac94 !important;
+}
+
+.osu-orange {
+  background-color: #d65828 !important;
+}
+
+.osu-orange-text {
+  color: #d65828 !important;
+}
+
+.osu-blue.lighten-2 {
+  background-color: #a8c0df !important;
+}
+
+.osu-blue-text.text-lighten-2 {
+  color: #a8c0df !important;
+}
+
+.osu-blue.lighten-1 {
+  background-color: #92b0d7 !important;
+}
+
+.osu-blue-text.text-lighten-1 {
+  color: #92b0d7 !important;
+}
+
+.osu-blue {
+  background-color: #92b0d7 !important;
+}
+
+.osu-blue-text {
+  color: #92b0d7 !important;
+}
+
+.osu-blue.darken-1 {
+  background-color: #839ec1 !important;
+}
+
+.osu-blue-text.text-darken-1 {
+  color: #839ec1 !important;
+}
+
+.osu-blue.darken-2 {
+  background-color: #758dac !important;
+}
+
+.osu-blue-text.text-darken-2 {
+  color: #758dac !important;
+}
+
+.osu-purple.lighten-5 {
+  background-color: #c28faf !important;
+}
+
+.osu-purple-text.text-lighten-5 {
+  color: #c28faf !important;
+}
+
+.osu-purple {
+  background-color: #851e5e !important;
+}
+
+.osu-purple-text {
+  color: #851e5e !important;
+}
+
+.osu-green.lighten-5 {
+  background-color: #c8cb9c !important;
+}
+
+.osu-green-text.text-lighten-5 {
+  color: #c8cb9c !important;
+}
+
+.osu-green {
+  background-color: #909738 !important;
+}
+
+.osu-green-text {
+  color: #909738 !important;
+}
+
+.osu-brown.lighten-5 {
+  background-color: #a29c98 !important;
+}
+
+.osu-brown-text.text-lighten-5 {
+  color: #a29c98 !important;
+}
+
+.osu-brown {
+  background-color: #453831 !important;
+}
+
+.osu-brown-text {
+  color: #453831 !important;
+}
+
+.materialize-red.lighten-5 {
+  background-color: #fdeaeb !important;
+}
+
+.materialize-red-text.text-lighten-5 {
+  color: #fdeaeb !important;
+}
+
+.materialize-red.lighten-4 {
+  background-color: #f8c1c3 !important;
+}
+
+.materialize-red-text.text-lighten-4 {
+  color: #f8c1c3 !important;
+}
+
+.materialize-red.lighten-3 {
+  background-color: #f3989b !important;
+}
+
+.materialize-red-text.text-lighten-3 {
+  color: #f3989b !important;
+}
+
+.materialize-red.lighten-2 {
+  background-color: #ee6e73 !important;
+}
+
+.materialize-red-text.text-lighten-2 {
+  color: #ee6e73 !important;
+}
+
+.materialize-red.lighten-1 {
+  background-color: #ea454b !important;
+}
+
+.materialize-red-text.text-lighten-1 {
+  color: #ea454b !important;
+}
+
+.materialize-red {
+  background-color: #e51c23 !important;
+}
+
+.materialize-red-text {
+  color: #e51c23 !important;
+}
+
+.materialize-red.darken-1 {
+  background-color: #d0181e !important;
+}
+
+.materialize-red-text.text-darken-1 {
+  color: #d0181e !important;
+}
+
+.materialize-red.darken-2 {
+  background-color: #b9151b !important;
+}
+
+.materialize-red-text.text-darken-2 {
+  color: #b9151b !important;
+}
+
+.materialize-red.darken-3 {
+  background-color: #a21318 !important;
+}
+
+.materialize-red-text.text-darken-3 {
+  color: #a21318 !important;
+}
+
+.materialize-red.darken-4 {
+  background-color: #8b1014 !important;
+}
+
+.materialize-red-text.text-darken-4 {
+  color: #8b1014 !important;
+}
+
 .red.lighten-5 {
   background-color: #FFEBEE !important;
 }
@@ -2508,7 +2708,7 @@ ul {
 }
 
 a {
-  color: #039be5;
+  color: #92b0d7;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -10463,10 +10663,7 @@ main {
   width: 16%;
   height: 6px;
 }
-.rainbow div.red {
-  width: 18%;
-}
-.rainbow div.purple {
+.rainbow div:first-child, .rainbow div:last-child {
   width: 18%;
 }
 
@@ -10588,8 +10785,12 @@ main {
   padding-top: 2em;
 }
 .next-meeting .date, .next-meeting .location {
-  border-bottom: 1px dotted #42A5F5;
-  color: #64B5F6;
+  border-bottom: 1px dotted #758dac;
+  color: #758dac;
+}
+.next-meeting.inverted .date, .next-meeting.inverted .location {
+  border-bottom: 1px dotted #a8c0df;
+  color: #a8c0df;
 }
 
 label {
@@ -10634,6 +10835,7 @@ label[for="email2"].active:before, label[for="email"].active:before {
 footer.page-footer {
   background: #333;
   color: #FFF;
+  margin-top: 0;
 }
 footer.page-footer a {
   color: #FFF;

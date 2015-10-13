@@ -6,6 +6,64 @@
 
 // Google Color Palette defined: http://www.google.com/design/spec/style/color.html
 
+
+$osu-scarlet: (
+  // brand.osu.edu guidelines: We can't tint the "scarlet"
+  "base":       #bb0000,
+);
+
+$osu-grey: (
+  "base":       #666666,
+);
+
+// PMS 159
+$osu-orange: (
+  "lighten-5":  #ebac94,
+  "base":       #d65828,
+);
+
+// PMS 644
+$osu-blue: (
+  "lighten-2":  #a8c0df,
+  "lighten-1":  #92b0d7,
+  "base":       #92b0d7,
+  "darken-1":   #839ec1,
+  "darken-2":   #758dac
+);
+
+// PMS 2425
+$osu-purple: (
+  "lighten-5":  #c28faf,
+  "base":       #851e5e,
+);
+
+// PMS 391
+$osu-green: (
+  "lighten-5":  #c8cb9c,
+  "base":       #909738,
+);
+
+// PMS 7532
+$osu-brown: (
+  "lighten-5":  #a29c98,
+  "base":       #453831,
+);
+
+// Etc...
+
+$materialize-red: (
+  "lighten-5":  #fdeaeb,
+  "lighten-4":  #f8c1c3,
+  "lighten-3":  #f3989b,
+  "lighten-2":  #ee6e73,
+  "lighten-1":  #ea454b,
+  "base":       #e51c23,
+  "darken-1":   #d0181e,
+  "darken-2":   #b9151b,
+  "darken-3":   #a21318,
+  "darken-4":   #8b1014,
+);
+
 $red: (
   "lighten-5":  #FFEBEE,
   "lighten-4":  #FFCDD2,
@@ -324,6 +382,14 @@ $shades: (
 );
 
 $colors: (
+  "osu-scarlet": $osu-scarlet,
+  "osu-grey": $osu-grey,
+  "osu-orange": $osu-orange,
+  "osu-blue": $osu-blue,
+  "osu-purple": $osu-purple,
+  "osu-green": $osu-green,
+  "osu-brown": $osu-brown,
+  "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,
   "purple": $purple,
@@ -391,7 +457,6 @@ $colors: (
       @return map-get($curr_color, $type);
     }
   }
-  @warn "Unknown `#{$color}, #{$type}` in $colors.";
+  @warn "Unknown `#{name}` in $colors.";
   @return null;
 }
-
