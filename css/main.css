@@ -10613,4 +10613,18 @@ label[for="email2"].active:before, label[for="email"].active:before {
   content: 'Enter your email and click sign up';
 }
 
+.osu-navbar {
+  background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
+  height: 42px;
+  padding: 12px 0;
+}
+
+.osu-navbar a {
+  height: 16px;
+  width: 80px;
+  display: block;
+  text-indent: -9999px;
+  background: url(http://brand.osu.edu/assets/site/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
+}
+
 /*# sourceMappingURL=main.css.map */
