@@ -10450,7 +10450,8 @@ main {
 .hero {
   min-height: 600px;
   height: auto;
-  background: url("../img/union-softblur.jpg") no-repeat;
+  background: url("../img/union-softblur.jpg") no-repeat 50% 50% fixed;
+  background-size: cover;
   color: #FFF;
 }
 
@@ -10583,6 +10584,9 @@ main {
   }
 }
 
+.next-meeting {
+  padding-top: 2em;
+}
 .next-meeting .date, .next-meeting .location {
   border-bottom: 1px dotted #42A5F5;
   color: #64B5F6;
@@ -10625,6 +10629,26 @@ label[for="email2"].active:before, label[for="email"].active:before {
   display: block;
   text-indent: -9999px;
   background: url(http://brand.osu.edu/assets/site/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
+}
+
+footer.page-footer {
+  background: #333;
+  color: #FFF;
+}
+footer.page-footer a {
+  color: #FFF;
+  text-decoration: underline;
+}
+footer.page-footer p {
+  margin: 0;
+  font-size: 0.85em;
+}
+footer.page-footer li {
+  float: left;
+  padding: 0;
+}
+footer.page-footer li a {
+  padding: 0 0.5em;
 }
 
 /*# sourceMappingURL=main.css.map */

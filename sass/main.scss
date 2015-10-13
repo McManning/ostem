@@ -19,7 +19,8 @@ main {
 .hero {
     min-height: 600px;
     height: auto;
-    background: url('../img/union-softblur.jpg') no-repeat;
+    background: url('../img/union-softblur.jpg') no-repeat 50% 50% fixed;
+    background-size: cover;
     color: #FFF;
 }
 
@@ -58,10 +59,11 @@ main {
 }
 
 .next-meeting {
+    padding-top: 2em;
+
     .date, .location {
         border-bottom: 1px dotted color('blue', 'lighten-1');
         color: color('blue', 'lighten-2');
-
     }
 }
 
@@ -113,4 +115,30 @@ label[for="email2"].active:before, label[for="email"].active:before {
     display: block;
     text-indent: -9999px;
     background: url(http://brand.osu.edu/assets/site/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
+}
+
+
+// Footer style adjustments (OSU branding)
+footer.page-footer {
+    background: #333;
+    color: #FFF;
+
+    a {
+        color: #FFF;
+        text-decoration: underline;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.85em;
+    }
+
+    li {
+        float: left;
+        padding: 0;
+
+        a {
+            padding: 0 0.5em;
+        }
+    }
 }

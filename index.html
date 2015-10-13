@@ -22,7 +22,10 @@
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo red-text text-darken-4">oSTEM at Ohio State</a>
 
+            <!-- Social links -->
             <ul class="right">
+                <li><a href="#"><i class="material-icons blue-text">share</i></a></li>
+                <li><a href="#"><i class="material-icons blue-text">share</i></a></li>
                 <li><a href="#"><i class="material-icons blue-text">share</i></a></li>
             </ul>
         </div>
@@ -50,9 +53,10 @@
 
             <div class="row">
                 <div class="input-field col s12 m8 offset-m2">
-                    <label for="email">Sign up for our mailing list</label>
                     <input id="email" type="email" class="validate">
-                    <a class="waves-effect waves-green btn"><i class="material-icons left">send</i> sign up</a>
+                    <label for="email" data-error="You need to enter a valid email" data-success="Awesome!">
+                        <a class="waves-effect waves-green btn"><i class="material-icons left">send</i> sign up</a>
+                    </label>
                 </div>
             </div>
 
@@ -193,7 +197,6 @@
             <div class="input-field col s12 m8 offset-m2">
                 <input id="email2" type="email" class="validate">
                 <label for="email2" data-error="You need to enter a valid email" data-success="Awesome!">
-                    Sign up for our mailing list
                     <a class="waves-effect waves-green btn"><i class="material-icons left">send</i> sign up</a>
                 </label>
                 
@@ -201,27 +204,29 @@
         </div>
     </div>
 
-    <footer class="page-footer orange">
+    <!-- standard OSU footer -->
+    <footer class="page-footer">
         <div class="container">
-            Content!
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col s9 m10">
-                        <span class="hide-on-med-and-down">
-                        &copy; 2015 Out in Science, Technology, Engineering and Mathematics at The Ohio State University.
-                        </span>
-                        <span class="hide-on-large-only">
-                        &copy; 2015 oSTEM at The Ohio State University.
-                        </span>
-                    </div>
-                    <div class="col s3 m2">
-                        <a href="#!">Privacy Policy</a>
-                    </div>
+            <div class="row">
+
+                <!-- Page information and assistance -->
+                <div class="col s12 m9">
+                    <a href="http://www.osu.edu/"><img src="img/osu-web-footer.png" alt="The Ohio State University" title="The Ohio State University home page"></a>
+                    <p>&copy; 2015 | Student Academic Services Building | 281 W. Lane Ave. | Columbus, Ohio 43210 | <a href="tel:614-292-OHIO">614-292-OHIO</a></p>
+                    <p>Contact: <a href="mailto:TODO@osu.edu">Advisor</a> | <a href="mailto:TODO@osu.edu">Webmaster</a></p>
+                    <p><a href="mailto:TODO@osu.edu">Request</a> an alternate format of this page | <a href="http://hr.osu.edu/policy/resources/110nondiscrimnotice.pdf">Nondiscrimination notice</a></p>
+                </div>  <!-- .col -->
+
+                <!-- Social links -->
+                <div class="col hide-on-small-only m3">
+                    <ul class="right">
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                    </ul>
                 </div>
-            </div>
-        </div>
+            </div> <!-- .row -->
+        </div> <!-- .container -->
     </footer>
 
 
