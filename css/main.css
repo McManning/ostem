@@ -10653,6 +10653,7 @@ main {
   background: url("../img/union-softblur.jpg") no-repeat 50% 50% fixed;
   background-size: cover;
   color: #FFF;
+  padding-top: 6em;
 }
 
 .rainbow {
@@ -10781,12 +10782,10 @@ main {
   }
 }
 
-.next-meeting {
-  padding-top: 2em;
-}
 .next-meeting .date, .next-meeting .location {
   border-bottom: 1px dotted #758dac;
   color: #758dac;
+  white-space: nowrap;
 }
 .next-meeting.inverted {
   color: #FFF;
@@ -10824,21 +10823,29 @@ label[for="email2"].active:before, label[for="email"].active:before {
 .osu-navbar {
   background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
   height: 42px;
-  padding: 12px 0;
+  padding: 10px 0;
 }
-
-.osu-navbar a {
+.osu-navbar a.logo {
   height: 16px;
   width: 80px;
   display: block;
   text-indent: -9999px;
-  background: url(http://brand.osu.edu/assets/site/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
+  background: url(http://brand.osu.edu/assets/site/osu_navbar/images/white/osu_name.png) 0 2px no-repeat;
+}
+.osu-navbar div > a {
+  color: white;
+  padding: 0 0.5em;
+  font-size: 0.85em;
+}
+.osu-navbar div > a:hover, .osu-navbar div > a:active {
+  text-decoration: underline;
 }
 
 footer.page-footer {
   background: #333;
   color: #FFF;
   margin-top: 0;
+  padding: 2.5em 0;
 }
 footer.page-footer a {
   color: #FFF;
@@ -10854,6 +10861,24 @@ footer.page-footer li {
 }
 footer.page-footer li a {
   padding: 0 0.5em;
+}
+footer.page-footer .row {
+  margin: 0;
+}
+
+.map-mockup {
+  background: url("../img/directions-mockup.png") no-repeat 50% 50%;
+  background-size: cover;
+  min-height: 400px;
+  padding: 2em;
+}
+.map-mockup img {
+  float: left;
+}
+
+.row {
+  margin-bottom: 0;
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */
