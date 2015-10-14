@@ -65,6 +65,8 @@ main {
     }
 
     &.inverted {
+        color: #FFF;
+        
         .date, .location {
             border-bottom: 1px dotted color('osu-blue', 'lighten-2');
             color: color('osu-blue', 'lighten-2');

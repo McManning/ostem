@@ -10788,6 +10788,9 @@ main {
   border-bottom: 1px dotted #758dac;
   color: #758dac;
 }
+.next-meeting.inverted {
+  color: #FFF;
+}
 .next-meeting.inverted .date, .next-meeting.inverted .location {
   border-bottom: 1px dotted #a8c0df;
   color: #a8c0df;
