@@ -243,17 +243,6 @@
                 </div>
             </div>
         </div>
-        <div class="row center">
-
-            <div class="input-field col s12 m8 offset-m2">
-                <input id="email2" type="email" class="validate">
-                <label for="email2" data-error="You need to enter a valid email" data-success="Awesome!">
-                    <a class="waves-effect waves-green btn"><i class="material-icons left">send</i> sign up</a>
-                </label>
-                
-            </div>
-        </div>
-        
     </div>
 
     <!-- Placeholder mockup for google maps integration -->
@@ -304,29 +293,33 @@
 
     <script>
         $(function() {
-            $box = $('.sign-up-box');
-            $('.front').click(function() {
-                $box.removeClass('show-front')
-                    .addClass('show-top')
-                    .delay(2000)
-                    .queue(function(next) {
-                        $(this).removeClass('show-top')
-                            .addClass('show-right')
-                            .delay(2000)
-                            .queue(function(next) {
-                                $(this).removeClass('show-right')
-                                    .addClass('show-bottom')
-                                    .delay(2000)
-                                    .queue(function(next) {
-                                        $(this).removeClass('show-bottom')
-                                            .addClass('show-front');
+            $('input.sign-up').keydown(function(e) {
+                if (e.which === 13) {
+                    $(this).closest('.sign-up-box')
+                        .removeClass('show-top')
+                        .addClass('show-right')
+                        .delay(2000)
+                        .queue(function(next) {
+                            $(this).removeClass('show-right')
+                                .addClass('show-bottom')
+                                .delay(2000)
+                                .queue(function(next) {
+                                    $(this).removeClass('show-bottom')
+                                        .addClass('show-front');
 
-                                        next();
-                                    });
-                                next();
-                            });
-                        next();
-                    })
+                                    next();
+                                });
+                            next();
+                        });
+                }
+            });
+
+            $('.front').click(function() {
+                $(this).closest('.sign-up-box')
+                    .removeClass('show-front')
+                    .addClass('show-top')
+                    .find('input.sign-up')
+                        .focus();
             });
         })
     </script>

@@ -10780,6 +10780,8 @@ main {
 .next-meeting .date, .next-meeting .location {
   border-bottom: 1px dotted #758dac;
   color: #758dac;
+}
+.next-meeting .date {
   white-space: nowrap;
 }
 .next-meeting.inverted {
@@ -10866,6 +10868,7 @@ footer.page-footer .row {
   background-size: cover;
   min-height: 400px;
   padding: 2em;
+  margin-top: 40px;
 }
 .map-mockup img {
   float: left;

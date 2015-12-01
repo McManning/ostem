@@ -73,6 +73,10 @@ main {
     .date, .location {
         border-bottom: 1px dotted color('osu-blue', 'darken-2');
         color: color('osu-blue', 'darken-2');
+    }
+
+    // Don't let date wrap (looks crappy)
+    .date {
         white-space: nowrap;
     }
 
@@ -185,6 +189,7 @@ footer.page-footer {
 
     min-height: 400px;
     padding: 2em;
+    margin-top: 40px;
 
     img {
         float: left;
