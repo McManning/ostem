@@ -17,12 +17,24 @@ main {
 
 
 .hero {
-    min-height: 600px;
-    height: auto;
+    height: 100vh;
+    padding: 0;
+
     background: url('../img/union-softblur.jpg') no-repeat 50% 50% fixed;
     background-size: cover;
     color: #FFF;
-    padding-top: 6em;
+
+    .description-blurb {
+        position: absolute;
+        bottom: 0;
+        background: #FFF;
+        color: #000;
+        width: 100%;
+    }
+}
+
+.description p {
+    margin-top: 0;
 }
 
 .rainbow {
@@ -186,3 +198,124 @@ footer.page-footer {
     margin-bottom: 0;
     margin-top: 20px;
 }
+
+$box-width: 350px !default;
+$box-height: 70px !default;
+$box-depth: 70px !default;
+
+.sign-up-box-container {
+    width: $box-width;
+    height: $box-height;
+    position: relative;
+    margin: 0 auto;
+    -webkit-perspective: 1200px;
+       -moz-perspective: 1200px;
+         -o-perspective: 1200px;
+            perspective: 1200px;
+
+    .sign-up-box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+          -webkit-transform-style: preserve-3d;
+             -moz-transform-style: preserve-3d;
+               -o-transform-style: preserve-3d;
+                  transform-style: preserve-3d;
+          -webkit-transition: -webkit-transform 1s;
+             -moz-transition: -moz-transform 1s;
+               -o-transition: -o-transform 1s;
+                  transition: transform 1s;
+
+        .side {
+            display: block;
+            position: absolute;
+            line-height: $box-height;
+            font-size: 2rem;
+            text-align: center;
+            color: white;
+            margin: 0;
+
+            -webkit-backface-visibility: hidden;
+               -moz-backface-visibility: hidden;
+                 -o-backface-visibility: hidden;
+                    backface-visibility: hidden;
+
+            border: 2px solid #000;
+            border-radius: 10px;
+            color: #000;
+        }
+
+        .front,
+        .back {
+          width: $box-width;
+          height: $box-height;
+        }
+
+        .right,
+        .left {
+            width: $box-depth;
+            height: $box-height;
+            left: $box-width/2 - $box-depth/2;
+        }
+
+        .top,
+        .bottom {
+            width: $box-width;
+            height: $box-depth;
+            top: 0;
+            line-height: $box-height;
+        }
+
+        input.sign-up {
+            background: none;
+            text-align: left;
+            padding: 0.5em;
+        }
+
+        .front  {
+            @include transform(translateZ( $box-depth/2 ));
+        }
+        .back   {
+            @include transform(rotateX( -180deg ) translateZ(  $box-depth/2 ));
+        }
+        .right {
+            @include transform(rotateY(   90deg ) translateZ( $box-width/2 ));
+        }
+        .left {
+            @include transform(rotateY(  -90deg ) translateZ( $box-width/2 ));
+        }
+        .top {
+            @include transform(rotateX(   90deg ) translateZ( $box-height/2 ));
+        }
+        .bottom {
+            @include transform(rotateX(  -90deg ) translateZ( $box-height/2 ));
+        }
+
+        &.show-front {
+            @include transform(translateZ(  -$box-depth/2 ));
+        }
+        &.show-back {
+            @include transform(translateZ( -$box-depth/2 ) rotateX( -180deg ));
+        }
+        &.show-right {
+            @include transform(translateZ( -$box-width/2 ) rotateY(  -90deg ));
+        }
+        &.show-left {
+            @include transform(translateZ( -$box-width/2 ) rotateY(   90deg ));
+        }
+        &.show-top {
+            @include transform(translateZ( -$box-height/2 ) rotateX(  -90deg ));
+        }
+        &.show-bottom {
+            @include transform(translateZ( -$box-height/2 ) rotateX(   90deg ));
+        }
+
+        &.inverted {
+            .side {
+                border: 2px solid #FFF;
+                color: #FFF;
+            }
+        }
+    }
+}
+

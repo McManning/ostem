@@ -10,20 +10,6 @@
     <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-    <!-- TEMP OSU navbar placeholder. Will eventually be replaced by the actual CSS/JS package -->
-    <div class="osu-navbar">
-        <div class="container">
-            <div class="right">
-                <a href="#!">Help</a>
-                <a href="#!">BuckeyeLink</a>
-                <a href="#!">Map</a>
-                <a href="#!">Find People</a>
-                <a href="#!">Big Butts</a>
-                <a href="#!">Search Ohio State</a>
-            </div>
-            <a class="logo" href="http://osu.edu" title="The Ohio State University">The Ohio State University</a>
-        </div>
-    </div>
 
     <!-- temporarily hiding. Kinda collides with the OSU nav a bit -->
     <nav class="white" role="navigation" style="display: none">
@@ -42,6 +28,21 @@
 
     <!-- Hero -->
     <div class="hero">
+        <!-- TEMP OSU navbar placeholder. Will eventually be replaced by the actual CSS/JS package -->
+        <div class="osu-navbar">
+            <div class="container">
+                <div class="right">
+                    <a href="#!">Help</a>
+                    <a href="#!">BuckeyeLink</a>
+                    <a href="#!">Map</a>
+                    <a href="#!">Find People</a>
+                    <a href="#!">Big Butts</a>
+                    <a href="#!">Search Ohio State</a>
+                </div>
+                <a class="logo" href="http://osu.edu" title="The Ohio State University">The Ohio State University</a>
+            </div>
+        </div>
+
         <div class="container center">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
@@ -52,12 +53,16 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="input-field col s12 m8 offset-m2">
-                    <input id="email" type="email" class="validate">
-                    <label for="email" data-error="You need to enter a valid email" data-success="Awesome!">
-                        <a class="waves-effect waves-green btn"><i class="material-icons left">send</i> sign up</a>
-                    </label>
+            <div class="sign-up-box-container">
+                <div class="sign-up-box show-front inverted">
+                    <div class="side front">
+                        Join our mailing list!
+                    </div>
+                    <input class="side top sign-up" placeholder="Your email address">
+                    <div class="side right">
+                        ...
+                    </div>
+                    <div class="side bottom">Thanks!</div>
                 </div>
             </div>
 
@@ -78,7 +83,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col s4">
-                        <img class="responsive-img" style="padding-top:10%" src="img/ostem-logo.png">
+                        <img class="responsive-img" src="img/ostem-logo.png">
                     </div>
                     <div class="col s8">
                         <p class="flow-text">
@@ -225,6 +230,21 @@
             </div>
         </div>
         <div class="row center">
+            <div class="sign-up-box-container">
+                <div class="sign-up-box show-front">
+                    <div class="side front">
+                        Join our mailing list!
+                    </div>
+                    <input class="side top sign-up" placeholder="Your email address">
+                    <div class="side right">
+                        ...
+                    </div>
+                    <div class="side bottom">Thanks!</div>
+                </div>
+            </div>
+        </div>
+        <div class="row center">
+
             <div class="input-field col s12 m8 offset-m2">
                 <input id="email2" type="email" class="validate">
                 <label for="email2" data-error="You need to enter a valid email" data-success="Awesome!">
@@ -233,6 +253,7 @@
                 
             </div>
         </div>
+        
     </div>
 
     <!-- Placeholder mockup for google maps integration -->
@@ -280,6 +301,35 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/vendor/materialize.min.js"></script>
     <script src="js/app.js"></script>
+
+    <script>
+        $(function() {
+            $box = $('.sign-up-box');
+            $('.front').click(function() {
+                $box.removeClass('show-front')
+                    .addClass('show-top')
+                    .delay(2000)
+                    .queue(function(next) {
+                        $(this).removeClass('show-top')
+                            .addClass('show-right')
+                            .delay(2000)
+                            .queue(function(next) {
+                                $(this).removeClass('show-right')
+                                    .addClass('show-bottom')
+                                    .delay(2000)
+                                    .queue(function(next) {
+                                        $(this).removeClass('show-bottom')
+                                            .addClass('show-front');
+
+                                        next();
+                                    });
+                                next();
+                            });
+                        next();
+                    })
+            });
+        })
+    </script>
 
     </body>
 </html>

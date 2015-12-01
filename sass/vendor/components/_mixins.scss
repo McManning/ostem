@@ -3,3 +3,10 @@
     -moz-box-shadow: $args1, $args2;
     box-shadow: $args1, $args2;
 }
+
+@mixin transform($args) {
+    -webkit-transform: $args;
+       -moz-transform: $args;
+         -o-transform: $args;
+            transform: $args;
+}

@@ -7056,7 +7056,6 @@ nav .brand-logo.center {
   left: 50%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
@@ -7065,7 +7064,6 @@ nav .brand-logo.center {
     left: 50%;
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
   }
@@ -7129,7 +7127,6 @@ nav .input-field label.active i {
 nav .input-field label.active {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
-  -ms-transform: translateY(0);
   -o-transform: translateY(0);
   transform: translateY(0);
 }
@@ -7890,7 +7887,6 @@ button.btn-floating {
   transition-property: transform, opacity;
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
-  -ms-transform: scale(0);
   -o-transform: scale(0);
   transform: scale(0);
   pointer-events: none;
@@ -7928,7 +7924,6 @@ button.btn-floating {
 .waves-circle {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
@@ -8441,7 +8436,6 @@ textarea.materialize-textarea + label:after {
   font-size: 0.8rem;
   -webkit-transform: translateY(-140%);
   -moz-transform: translateY(-140%);
-  -ms-transform: translateY(-140%);
   -o-transform: translateY(-140%);
   transform: translateY(-140%);
 }
@@ -8599,7 +8593,6 @@ textarea.materialize-textarea {
   z-index: -1;
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
-  -ms-transform: scale(0);
   -o-transform: scale(0);
   transform: scale(0);
 }
@@ -8617,7 +8610,6 @@ textarea.materialize-textarea {
   z-index: 0;
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);
-  -ms-transform: scale(1.02);
   -o-transform: scale(1.02);
   transform: scale(1.02);
 }
@@ -8635,7 +8627,6 @@ textarea.materialize-textarea {
   z-index: 0;
   -webkit-transform: scale(0.5);
   -moz-transform: scale(0.5);
-  -ms-transform: scale(0.5);
   -o-transform: scale(0.5);
   transform: scale(0.5);
 }
@@ -8744,7 +8735,6 @@ form p:last-child {
   border-bottom: 2px solid #9e9e9e;
   -webkit-transform: rotate(40deg);
   -moz-transform: rotate(40deg);
-  -ms-transform: rotate(40deg);
   -o-transform: rotate(40deg);
   transform: rotate(40deg);
   -webkit-backface-visibility: hidden;
@@ -8771,7 +8761,6 @@ form p:last-child {
   border-bottom: none;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
   -webkit-backface-visibility: hidden;
@@ -9080,7 +9069,6 @@ input[type=range] + .thumb {
   transform-origin: 50% 50%;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
@@ -9092,7 +9080,6 @@ input[type=range] + .thumb .value {
   font-size: 0;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
@@ -10258,7 +10245,6 @@ select {
   border-radius: 50%;
   -webkit-transform: scale(0.75);
   -moz-transform: scale(0.75);
-  -ms-transform: scale(0.75);
   -o-transform: scale(0.75);
   transform: scale(0.75);
   background: #0089ec;
@@ -10456,7 +10442,6 @@ select {
   border-radius: 50%;
   -webkit-transform: scale(0.9);
   -moz-transform: scale(0.9);
-  -ms-transform: scale(0.9);
   -o-transform: scale(0.9);
   transform: scale(0.9);
   background-color: #9e9e9e;
@@ -10648,12 +10633,22 @@ main {
 }
 
 .hero {
-  min-height: 600px;
-  height: auto;
+  height: 100vh;
+  padding: 0;
   background: url("../img/union-softblur.jpg") no-repeat 50% 50% fixed;
   background-size: cover;
   color: #FFF;
-  padding-top: 6em;
+}
+.hero .description-blurb {
+  position: absolute;
+  bottom: 0;
+  background: #FFF;
+  color: #000;
+  width: 100%;
+}
+
+.description p {
+  margin-top: 0;
 }
 
 .rainbow {
@@ -10879,6 +10874,145 @@ footer.page-footer .row {
 .row {
   margin-bottom: 0;
   margin-top: 20px;
+}
+
+.sign-up-box-container {
+  width: 350px;
+  height: 70px;
+  position: relative;
+  margin: 0 auto;
+  -webkit-perspective: 1200px;
+  -moz-perspective: 1200px;
+  -o-perspective: 1200px;
+  perspective: 1200px;
+}
+.sign-up-box-container .sign-up-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
+}
+.sign-up-box-container .sign-up-box .side {
+  display: block;
+  position: absolute;
+  line-height: 70px;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  margin: 0;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 2px solid #000;
+  border-radius: 10px;
+  color: #000;
+}
+.sign-up-box-container .sign-up-box .front,
+.sign-up-box-container .sign-up-box .back {
+  width: 350px;
+  height: 70px;
+}
+.sign-up-box-container .sign-up-box .right,
+.sign-up-box-container .sign-up-box .left {
+  width: 70px;
+  height: 70px;
+  left: 140px;
+}
+.sign-up-box-container .sign-up-box .top,
+.sign-up-box-container .sign-up-box .bottom {
+  width: 350px;
+  height: 70px;
+  top: 0;
+  line-height: 70px;
+}
+.sign-up-box-container .sign-up-box input.sign-up {
+  background: none;
+  text-align: left;
+  padding: 0.5em;
+}
+.sign-up-box-container .sign-up-box .front {
+  -webkit-transform: translateZ(35px);
+  -moz-transform: translateZ(35px);
+  -o-transform: translateZ(35px);
+  transform: translateZ(35px);
+}
+.sign-up-box-container .sign-up-box .back {
+  -webkit-transform: rotateX(-180deg) translateZ(35px);
+  -moz-transform: rotateX(-180deg) translateZ(35px);
+  -o-transform: rotateX(-180deg) translateZ(35px);
+  transform: rotateX(-180deg) translateZ(35px);
+}
+.sign-up-box-container .sign-up-box .right {
+  -webkit-transform: rotateY(90deg) translateZ(175px);
+  -moz-transform: rotateY(90deg) translateZ(175px);
+  -o-transform: rotateY(90deg) translateZ(175px);
+  transform: rotateY(90deg) translateZ(175px);
+}
+.sign-up-box-container .sign-up-box .left {
+  -webkit-transform: rotateY(-90deg) translateZ(175px);
+  -moz-transform: rotateY(-90deg) translateZ(175px);
+  -o-transform: rotateY(-90deg) translateZ(175px);
+  transform: rotateY(-90deg) translateZ(175px);
+}
+.sign-up-box-container .sign-up-box .top {
+  -webkit-transform: rotateX(90deg) translateZ(35px);
+  -moz-transform: rotateX(90deg) translateZ(35px);
+  -o-transform: rotateX(90deg) translateZ(35px);
+  transform: rotateX(90deg) translateZ(35px);
+}
+.sign-up-box-container .sign-up-box .bottom {
+  -webkit-transform: rotateX(-90deg) translateZ(35px);
+  -moz-transform: rotateX(-90deg) translateZ(35px);
+  -o-transform: rotateX(-90deg) translateZ(35px);
+  transform: rotateX(-90deg) translateZ(35px);
+}
+.sign-up-box-container .sign-up-box.show-front {
+  -webkit-transform: translateZ(-35px);
+  -moz-transform: translateZ(-35px);
+  -o-transform: translateZ(-35px);
+  transform: translateZ(-35px);
+}
+.sign-up-box-container .sign-up-box.show-back {
+  -webkit-transform: translateZ(-35px) rotateX(-180deg);
+  -moz-transform: translateZ(-35px) rotateX(-180deg);
+  -o-transform: translateZ(-35px) rotateX(-180deg);
+  transform: translateZ(-35px) rotateX(-180deg);
+}
+.sign-up-box-container .sign-up-box.show-right {
+  -webkit-transform: translateZ(-175px) rotateY(-90deg);
+  -moz-transform: translateZ(-175px) rotateY(-90deg);
+  -o-transform: translateZ(-175px) rotateY(-90deg);
+  transform: translateZ(-175px) rotateY(-90deg);
+}
+.sign-up-box-container .sign-up-box.show-left {
+  -webkit-transform: translateZ(-175px) rotateY(90deg);
+  -moz-transform: translateZ(-175px) rotateY(90deg);
+  -o-transform: translateZ(-175px) rotateY(90deg);
+  transform: translateZ(-175px) rotateY(90deg);
+}
+.sign-up-box-container .sign-up-box.show-top {
+  -webkit-transform: translateZ(-35px) rotateX(-90deg);
+  -moz-transform: translateZ(-35px) rotateX(-90deg);
+  -o-transform: translateZ(-35px) rotateX(-90deg);
+  transform: translateZ(-35px) rotateX(-90deg);
+}
+.sign-up-box-container .sign-up-box.show-bottom {
+  -webkit-transform: translateZ(-35px) rotateX(90deg);
+  -moz-transform: translateZ(-35px) rotateX(90deg);
+  -o-transform: translateZ(-35px) rotateX(90deg);
+  transform: translateZ(-35px) rotateX(90deg);
+}
+.sign-up-box-container .sign-up-box.inverted .side {
+  border: 2px solid #FFF;
+  color: #FFF;
 }
 
 /*# sourceMappingURL=main.css.map */
