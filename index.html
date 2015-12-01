@@ -58,7 +58,10 @@
                     <div class="side front">
                         Join our mailing list!
                     </div>
-                    <input class="side top sign-up" placeholder="Your email address">
+                    <div class="side top sign-up">
+                        <input placeholder="Your email address">
+                        <button class="btn green">OK</button>
+                    </div>
                     <div class="side right">
                         ...
                     </div>
@@ -119,19 +122,33 @@
                         <i class="material-icons circle green">email</i>
                         <span class="title truncate">New Message</span>
                         <p>Sent on <strong>9/14/2015</strong></p>
-                        <a href="#!" class="secondary-content">READ MORE</a>
+                        <a href="#news-modal-1" class="secondary-content modal-trigger">READ MORE</a>
+
+                        <!-- Embed the modal right into the list item -->
+                        <div id="news-modal-1" class="modal">
+                            <div class="modal-content">
+                                <span class="right modal-close"><i class="material-icons">close</i></span>
+                                <h4>Game Night!</h4>
+                                <p>oSTEM is heading out to <strong>Kingmakers</strong>, the game parlour. Kingsmakers has hundreds of board and card games that we can play, but it <strong>costs $5 for the night.</strong></p>
+                                <p>
+                                We'll meet at <strong>5:30PM</strong> at the <strong>Brutus status in the Ohio Union.</strong> From there, we'll head out for dinner before going to Kingsmakers.
+                                </p>
+                                <strong>Other News</strong>
+                                <p>Results from the poll are in and the majority of people said that they prefer Wednesday meetings. So our meeting time next semester will continue to be on Wednesdays.</p>
+                            </div>
+                        </div>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle green">map</i>
                         <span class="title truncate">oSTEM - Get To Know Columbus</span>
                         <p>Sent on <strong>9/7/2015</strong></p>
-                        <a href="#!" class="secondary-content">READ MORE</a>
+                        <a href="#news-modal-2" class="secondary-content modal-trigger">READ MORE</a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle green">email</i>
                         <span class="title truncate">oSTEM - Introductory Meeting</span>
                         <p>Sent on <strong>8/31/2015</strong></p>
-                        <a href="#!" class="secondary-content">READ MORE</a>
+                        <a href="#news-modal-3" class="secondary-content modal-trigger">READ MORE</a>
                     </li>
                 </ul>
 
@@ -230,18 +247,23 @@
             </div>
         </div>
         <div class="row center">
+           
             <div class="sign-up-box-container">
                 <div class="sign-up-box show-front">
                     <div class="side front">
                         Join our mailing list!
                     </div>
-                    <input class="side top sign-up" placeholder="Your email address">
+                    <div class="side top sign-up">
+                        <input placeholder="Your email address">
+                        <button class="btn">OK</button>
+                    </div>
                     <div class="side right">
                         ...
                     </div>
                     <div class="side bottom">Thanks!</div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -293,32 +315,43 @@
 
     <script>
         $(function() {
-            $('input.sign-up').keydown(function(e) {
-                if (e.which === 13) {
-                    $(this).closest('.sign-up-box')
-                        .removeClass('show-top')
-                        .addClass('show-right')
-                        .delay(2000)
-                        .queue(function(next) {
-                            $(this).removeClass('show-right')
-                                .addClass('show-bottom')
-                                .delay(2000)
-                                .queue(function(next) {
-                                    $(this).removeClass('show-bottom')
-                                        .addClass('show-front');
 
-                                    next();
-                                });
-                            next();
-                        });
+            function submitEmail($container) {
+
+                // Fake submission logic. TODO: Actually submit! 
+                $container
+                    .removeClass('show-top')
+                    .addClass('show-right')
+                    .delay(2000)
+                    .queue(function(next) {
+                        $(this).removeClass('show-right')
+                            .addClass('show-bottom')
+                            .delay(2000)
+                            .queue(function(next) {
+                                $(this).removeClass('show-bottom')
+                                    .addClass('show-front');
+
+                                next();
+                            });
+                        next();
+                    });
+            }
+
+            $('.sign-up-box input').keydown(function(e) {
+                if (e.which === 13) {
+                    submitEmail($(this).closest('.sign-up-box'));
                 }
             });
+
+            $('.sign-up-box button').click(function() {
+                submitEmail($(this).closest('.sign-up-box'));
+            })
 
             $('.front').click(function() {
                 $(this).closest('.sign-up-box')
                     .removeClass('show-front')
                     .addClass('show-top')
-                    .find('input.sign-up')
+                    .find('input')
                         .focus();
             });
         })

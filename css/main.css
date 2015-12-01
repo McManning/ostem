@@ -10792,31 +10792,6 @@ main {
   color: #a8c0df;
 }
 
-label {
-  width: 100%;
-  text-align: left;
-}
-
-label .btn, label .btn-large {
-  position: absolute;
-  right: 2em;
-  top: 1em;
-  font-size: 1rem;
-  opacity: 0;
-}
-
-label.active .btn, label.active .btn-large {
-  opacity: 1;
-}
-
-label[for="email2"]:before, label[for="email"]:before {
-  content: 'Click here to sign up for our mailing list';
-}
-
-label[for="email2"].active:before, label[for="email"].active:before {
-  content: 'Enter your email and click sign up';
-}
-
 .osu-navbar {
   background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
   height: 42px;
@@ -10936,10 +10911,30 @@ footer.page-footer .row {
   top: 0;
   line-height: 70px;
 }
-.sign-up-box-container .sign-up-box input.sign-up {
+.sign-up-box-container .sign-up-box .bottom {
+  border-color: #66BB6A !important;
+  color: #66BB6A !important;
+}
+.sign-up-box-container .sign-up-box input {
   background: none;
-  text-align: left;
-  padding: 0.5em;
+  border: none;
+  line-height: 70px;
+  outline: none;
+  width: 270px;
+}
+.sign-up-box-container .sign-up-box button {
+  float: right;
+  width: 70px;
+  height: 70px;
+  margin-top: -2px;
+  margin-right: -2px;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0;
+  background-color: #4CAF50;
+  border-bottom: 2px solid #388E3C;
+  box-shadow: none;
 }
 .sign-up-box-container .sign-up-box .front {
   -webkit-transform: translateZ(35px);
@@ -11016,6 +11011,10 @@ footer.page-footer .row {
 .sign-up-box-container .sign-up-box.inverted .side {
   border: 2px solid #FFF;
   color: #FFF;
+}
+
+.modal p {
+  padding: 0.5em 0;
 }
 
 /*# sourceMappingURL=main.css.map */

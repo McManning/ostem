@@ -90,41 +90,6 @@ main {
     }
 }
 
-// Screwing around with putting buttons inside of input labels
-// (controlling button visibility based on input active)
-// Technically makes more sense if we just do :active for the parent
-// input so we don't have to be bound on the label...
-label {
-    width: 100%;
-    text-align: left;
-}
-
-label .btn {
-    position: absolute;
-    right: 2em;
-    top: 1em;
-    font-size: 1rem;
-    opacity: 0;
-}
-
-label.active .btn {
-    opacity: 1;
-}
-
-
-// Temp content hacks for mailing list input labels.
-// I'll eventually be replacing the entire thing with something
-// a little more interesting.
-
-label[for="email2"]:before, label[for="email"]:before {
-    content: 'Click here to sign up for our mailing list';
-}
-
-label[for="email2"].active:before, label[for="email"].active:before {
-    content: 'Enter your email and click sign up';
-}
-
-
 // Temp CSS for the placeholder nav bar. Will be replaced with the actual asset set.
 .osu-navbar {
     background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
@@ -271,10 +236,34 @@ $box-depth: 70px !default;
             line-height: $box-height;
         }
 
-        input.sign-up {
+        .bottom {
+            border-color: color('green', 'lighten-1') !important;
+            color: color('green', 'lighten-1') !important;
+        }
+
+        // Email input
+        input {
             background: none;
-            text-align: left;
-            padding: 0.5em;
+            border: none;
+            line-height: 70px;
+            outline: none;
+            width: 270px;
+        }
+
+        // Submit button (for those who don't want to hit enter)
+        button {
+            float: right;
+            width: 70px;
+            height: 70px;
+            margin-top: -2px;
+            margin-right: -2px;
+            border-radius: 8px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            padding: 0;
+            background-color: color('green', 'base');
+            border-bottom: 2px solid color('green', 'darken-2');
+            box-shadow: none;
         }
 
         .front  {
@@ -324,3 +313,6 @@ $box-depth: 70px !default;
     }
 }
 
+.modal p {
+    padding: 0.5em 0;
+}
