@@ -2708,7 +2708,7 @@ ul {
 }
 
 a {
-  color: #92b0d7;
+  color: #2196F3;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -7211,9 +7211,9 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 h1 {
-  font-size: 4.2rem;
+  font-size: 4rem;
   line-height: 110%;
-  margin: 2.1rem 0 1.68rem 0;
+  margin: 2rem 0 1.6rem 0;
 }
 
 h2 {
@@ -10813,31 +10813,40 @@ main {
   text-decoration: underline;
 }
 
-footer.page-footer {
+footer {
   background: #333;
   color: #FFF;
-  margin-top: 0;
-  padding: 2.5em 0;
+  margin-top: 4rem;
+  padding-bottom: 2.5em;
 }
-footer.page-footer a {
+footer .rainbow {
+  margin-bottom: 2.5rem;
+}
+footer a {
   color: #FFF;
   text-decoration: underline;
 }
-footer.page-footer p {
+footer p {
   margin: 0;
   font-size: 0.85em;
 }
-footer.page-footer li {
+footer li {
   float: left;
   padding: 0;
 }
-footer.page-footer li a {
+footer li a {
   padding: 0 0.5em;
 }
-footer.page-footer .row {
+footer .row {
   margin: 0;
 }
 
+@media only screen and (max-width: 600px) {
+  footer img {
+    width: 90%;
+    height: auto;
+  }
+}
 .map-mockup {
   background: url("../img/directions-mockup.png") no-repeat 50% 50%;
   background-size: cover;
@@ -10854,167 +10863,109 @@ footer.page-footer .row {
   margin-top: 20px;
 }
 
-.sign-up-box-container {
-  width: 350px;
-  height: 70px;
-  position: relative;
-  margin: 0 auto;
-  -webkit-perspective: 1200px;
-  -moz-perspective: 1200px;
-  -o-perspective: 1200px;
-  perspective: 1200px;
-}
-.sign-up-box-container .sign-up-box {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 1s;
-  -moz-transition: -moz-transform 1s;
-  -o-transition: -o-transform 1s;
-  transition: transform 1s;
-}
-.sign-up-box-container .sign-up-box .side {
-  display: block;
-  position: absolute;
-  line-height: 70px;
-  font-size: 2rem;
-  text-align: center;
-  color: white;
-  margin: 0;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border: 2px solid #000;
-  border-radius: 10px;
-  color: #000;
-}
-.sign-up-box-container .sign-up-box .front,
-.sign-up-box-container .sign-up-box .back {
-  width: 350px;
-  height: 70px;
-}
-.sign-up-box-container .sign-up-box .right,
-.sign-up-box-container .sign-up-box .left {
-  width: 70px;
-  height: 70px;
-  left: 140px;
-}
-.sign-up-box-container .sign-up-box .top,
-.sign-up-box-container .sign-up-box .bottom {
-  width: 350px;
-  height: 70px;
-  top: 0;
-  line-height: 70px;
-}
-.sign-up-box-container .sign-up-box .bottom {
-  border-color: #66BB6A !important;
-  color: #66BB6A !important;
-}
-.sign-up-box-container .sign-up-box input {
-  background: none;
-  border: none;
-  line-height: 70px;
-  outline: none;
-  width: 270px;
-}
-.sign-up-box-container .sign-up-box button {
-  float: right;
-  width: 70px;
-  height: 70px;
-  margin-top: -2px;
-  margin-right: -2px;
-  border-radius: 8px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  padding: 0;
-  background-color: #4CAF50;
-  border-bottom: 2px solid #388E3C;
-  box-shadow: none;
-}
-.sign-up-box-container .sign-up-box .front {
-  -webkit-transform: translateZ(35px);
-  -moz-transform: translateZ(35px);
-  -o-transform: translateZ(35px);
-  transform: translateZ(35px);
-}
-.sign-up-box-container .sign-up-box .back {
-  -webkit-transform: rotateX(-180deg) translateZ(35px);
-  -moz-transform: rotateX(-180deg) translateZ(35px);
-  -o-transform: rotateX(-180deg) translateZ(35px);
-  transform: rotateX(-180deg) translateZ(35px);
-}
-.sign-up-box-container .sign-up-box .right {
-  -webkit-transform: rotateY(90deg) translateZ(175px);
-  -moz-transform: rotateY(90deg) translateZ(175px);
-  -o-transform: rotateY(90deg) translateZ(175px);
-  transform: rotateY(90deg) translateZ(175px);
-}
-.sign-up-box-container .sign-up-box .left {
-  -webkit-transform: rotateY(-90deg) translateZ(175px);
-  -moz-transform: rotateY(-90deg) translateZ(175px);
-  -o-transform: rotateY(-90deg) translateZ(175px);
-  transform: rotateY(-90deg) translateZ(175px);
-}
-.sign-up-box-container .sign-up-box .top {
-  -webkit-transform: rotateX(90deg) translateZ(35px);
-  -moz-transform: rotateX(90deg) translateZ(35px);
-  -o-transform: rotateX(90deg) translateZ(35px);
-  transform: rotateX(90deg) translateZ(35px);
-}
-.sign-up-box-container .sign-up-box .bottom {
-  -webkit-transform: rotateX(-90deg) translateZ(35px);
-  -moz-transform: rotateX(-90deg) translateZ(35px);
-  -o-transform: rotateX(-90deg) translateZ(35px);
-  transform: rotateX(-90deg) translateZ(35px);
-}
-.sign-up-box-container .sign-up-box.show-front {
-  -webkit-transform: translateZ(-35px);
-  -moz-transform: translateZ(-35px);
-  -o-transform: translateZ(-35px);
-  transform: translateZ(-35px);
-}
-.sign-up-box-container .sign-up-box.show-back {
-  -webkit-transform: translateZ(-35px) rotateX(-180deg);
-  -moz-transform: translateZ(-35px) rotateX(-180deg);
-  -o-transform: translateZ(-35px) rotateX(-180deg);
-  transform: translateZ(-35px) rotateX(-180deg);
-}
-.sign-up-box-container .sign-up-box.show-right {
-  -webkit-transform: translateZ(-175px) rotateY(-90deg);
-  -moz-transform: translateZ(-175px) rotateY(-90deg);
-  -o-transform: translateZ(-175px) rotateY(-90deg);
-  transform: translateZ(-175px) rotateY(-90deg);
-}
-.sign-up-box-container .sign-up-box.show-left {
-  -webkit-transform: translateZ(-175px) rotateY(90deg);
-  -moz-transform: translateZ(-175px) rotateY(90deg);
-  -o-transform: translateZ(-175px) rotateY(90deg);
-  transform: translateZ(-175px) rotateY(90deg);
-}
-.sign-up-box-container .sign-up-box.show-top {
-  -webkit-transform: translateZ(-35px) rotateX(-90deg);
-  -moz-transform: translateZ(-35px) rotateX(-90deg);
-  -o-transform: translateZ(-35px) rotateX(-90deg);
-  transform: translateZ(-35px) rotateX(-90deg);
-}
-.sign-up-box-container .sign-up-box.show-bottom {
-  -webkit-transform: translateZ(-35px) rotateX(90deg);
-  -moz-transform: translateZ(-35px) rotateX(90deg);
-  -o-transform: translateZ(-35px) rotateX(90deg);
-  transform: translateZ(-35px) rotateX(90deg);
-}
-.sign-up-box-container .sign-up-box.inverted .side {
-  border: 2px solid #FFF;
-  color: #FFF;
-}
-
 .modal p {
   padding: 0.5em 0;
+}
+
+.leadership hr {
+  margin: 0 3rem;
+  margin-top: 3rem;
+}
+.leadership .row {
+  margin: 0;
+}
+.leadership h4 {
+  margin-top: 3rem;
+}
+.leadership h5 {
+  font-weight: 300;
+}
+.leadership a {
+  line-height: 24px;
+}
+.leadership i.material-icons {
+  vertical-align: middle;
+  padding: 0 0.25em;
+}
+
+@media only screen and (max-width: 600px), only screen and (max-height: 700px) {
+  .hero {
+    height: initial;
+  }
+  .hero .description-blurb {
+    position: initial;
+    bottom: initial;
+    margin-top: 3em;
+  }
+}
+.editable[contenteditable] {
+  border: 2px solid red !important;
+}
+
+.sign-up {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+.sign-up .input-field {
+  width: 70%;
+  display: inline-block;
+  margin-right: 2em;
+  margin-top: 0;
+}
+.sign-up .input-field input {
+  font-size: 1.5em;
+  border: 1px solid white !important;
+  border-radius: 4px;
+  padding: 0 0.5em;
+  box-shadow: none !important;
+}
+.sign-up .input-field label {
+  font-size: 1.5em;
+  color: #FFF;
+  cursor: pointer;
+  top: 0.5rem;
+}
+.sign-up .input-field label.active {
+  font-size: 1.25em;
+  top: 0.5rem;
+  color: #FFF;
+}
+.sign-up .input-field input[type=email]:focus:not([readonly]) + label {
+  color: #FFF;
+}
+.sign-up .input-field button {
+  position: absolute;
+  top: 5px;
+  right: -20px;
+}
+.sign-up img {
+  height: 3em;
+  width: auto;
+  vertical-align: top;
+}
+.sign-up span.thanks {
+  font-size: 2em;
+  padding: 0 0.5em;
+  color: #66BB6A;
+}
+.sign-up.inverted .input-field input {
+  border: 1px solid rgba(0, 0, 0, 0.87) !important;
+}
+.sign-up.inverted .input-field label {
+  color: rgba(0, 0, 0, 0.87);
+}
+.sign-up.inverted .input-field label.active {
+  color: rgba(0, 0, 0, 0.87);
+}
+.sign-up.inverted .input-field input[type=email]:focus:not([readonly]) + label {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+@media only screen and (max-width: 600px) {
+  .sign-up {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

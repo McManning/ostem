@@ -117,11 +117,15 @@ main {
 
 
 // Footer style adjustments (OSU branding)
-footer.page-footer {
+footer {
     background: #333;
     color: #FFF;
-    margin-top: 0;
-    padding: 2.5em 0;
+    margin-top: 4rem;
+    padding-bottom: 2.5em;
+
+    .rainbow {
+        margin-bottom: 2.5rem;
+    }
 
     a {
         color: #FFF;
@@ -147,6 +151,15 @@ footer.page-footer {
     }
 }
 
+@media #{$small-and-down} {
+    // OSU footer banner doesn't fit well on small devices
+    footer img {
+        width: 90%;
+        height: auto;
+    }
+}
+
+
 // Mockup for an embedded google map of the next meeting
 .map-mockup {
     background: url('../img/directions-mockup.png') no-repeat 50% 50%;
@@ -169,150 +182,137 @@ footer.page-footer {
     margin-top: 20px;
 }
 
-$box-width: 350px !default;
-$box-height: 70px !default;
-$box-depth: 70px !default;
+.modal p {
+    padding: 0.5em 0;
+}
 
-.sign-up-box-container {
-    width: $box-width;
-    height: $box-height;
-    position: relative;
+.leadership {
+    hr {
+        margin: 0 3rem;
+        margin-top: 3rem;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    h4 {
+        margin-top: 3rem;
+    }
+
+    h5 {
+        font-weight: 300;
+    }
+
+    a {
+        line-height: 24px;
+    }
+
+    // Alignment corrections because material icons are broke as shit
+    i.material-icons {
+        vertical-align: middle;
+        padding: 0 0.25em;
+    }
+}
+
+// Better responsive behavior for the hero on small screens
+@media #{$small-and-down}, only screen and (max-height : 700px) {
+    .hero {
+        height: initial;
+
+        .description-blurb {
+            position: initial;
+            bottom: initial;
+            margin-top: 3em;
+        }
+    }
+}
+
+.editable[contenteditable] {
+    border: 2px solid red !important;
+}
+
+
+
+.sign-up {
+    width: 400px;
     margin: 0 auto;
-    -webkit-perspective: 1200px;
-       -moz-perspective: 1200px;
-         -o-perspective: 1200px;
-            perspective: 1200px;
+    margin-top: 1em;
 
-    .sign-up-box {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-          -webkit-transform-style: preserve-3d;
-             -moz-transform-style: preserve-3d;
-               -o-transform-style: preserve-3d;
-                  transform-style: preserve-3d;
-          -webkit-transition: -webkit-transform 1s;
-             -moz-transition: -moz-transform 1s;
-               -o-transition: -o-transform 1s;
-                  transition: transform 1s;
+    .input-field {
+        width: 70%;
+        display: inline-block;
+        margin-right: 2em;
+        margin-top: 0;
 
-        .side {
-            display: block;
-            position: absolute;
-            line-height: $box-height;
-            font-size: 2rem;
-            text-align: center;
-            color: white;
-            margin: 0;
-
-            -webkit-backface-visibility: hidden;
-               -moz-backface-visibility: hidden;
-                 -o-backface-visibility: hidden;
-                    backface-visibility: hidden;
-
-            border: 2px solid #000;
-            border-radius: 10px;
-            color: #000;
-        }
-
-        .front,
-        .back {
-          width: $box-width;
-          height: $box-height;
-        }
-
-        .right,
-        .left {
-            width: $box-depth;
-            height: $box-height;
-            left: $box-width/2 - $box-depth/2;
-        }
-
-        .top,
-        .bottom {
-            width: $box-width;
-            height: $box-depth;
-            top: 0;
-            line-height: $box-height;
-        }
-
-        .bottom {
-            border-color: color('green', 'lighten-1') !important;
-            color: color('green', 'lighten-1') !important;
-        }
-
-        // Email input
         input {
-            background: none;
-            border: none;
-            line-height: 70px;
-            outline: none;
-            width: 270px;
+            font-size: 1.5em;
+            border: 1px solid white !important;
+            border-radius: 4px;
+            padding: 0 0.5em;
+            box-shadow: none !important;
         }
 
-        // Submit button (for those who don't want to hit enter)
-        button {
-            float: right;
-            width: 70px;
-            height: 70px;
-            margin-top: -2px;
-            margin-right: -2px;
-            border-radius: 8px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            padding: 0;
-            background-color: color('green', 'base');
-            border-bottom: 2px solid color('green', 'darken-2');
-            box-shadow: none;
-        }
+        label {
+            font-size: 1.5em;
+            color: #FFF;
+            cursor: pointer;
+            top: 0.5rem;
 
-        .front  {
-            @include transform(translateZ( $box-depth/2 ));
-        }
-        .back   {
-            @include transform(rotateX( -180deg ) translateZ(  $box-depth/2 ));
-        }
-        .right {
-            @include transform(rotateY(   90deg ) translateZ( $box-width/2 ));
-        }
-        .left {
-            @include transform(rotateY(  -90deg ) translateZ( $box-width/2 ));
-        }
-        .top {
-            @include transform(rotateX(   90deg ) translateZ( $box-height/2 ));
-        }
-        .bottom {
-            @include transform(rotateX(  -90deg ) translateZ( $box-height/2 ));
-        }
-
-        &.show-front {
-            @include transform(translateZ(  -$box-depth/2 ));
-        }
-        &.show-back {
-            @include transform(translateZ( -$box-depth/2 ) rotateX( -180deg ));
-        }
-        &.show-right {
-            @include transform(translateZ( -$box-width/2 ) rotateY(  -90deg ));
-        }
-        &.show-left {
-            @include transform(translateZ( -$box-width/2 ) rotateY(   90deg ));
-        }
-        &.show-top {
-            @include transform(translateZ( -$box-height/2 ) rotateX(  -90deg ));
-        }
-        &.show-bottom {
-            @include transform(translateZ( -$box-height/2 ) rotateX(   90deg ));
-        }
-
-        &.inverted {
-            .side {
-                border: 2px solid #FFF;
+            &.active {
+                font-size: 1.25em;
+                top: 0.5rem;
                 color: #FFF;
+            }
+        }
+
+        input[type=email]:focus:not([readonly]) + label {
+            color: #FFF;
+        }
+
+        button {
+            position: absolute;
+            // TODO: This coordinate space is fucked. Fix.
+            top: 5px;
+            right: -20px;
+        }
+    }
+
+    img {
+        height: 3em;
+        width: auto;
+        vertical-align: top;
+    }
+
+    span.thanks {
+        font-size: 2em;
+        padding: 0 0.5em;
+        color: color('green', 'lighten-1');
+    }
+
+    // Inverted variant for the footer
+    &.inverted {
+        .input-field {
+            input {
+                border: 1px solid $off-black !important;
+            }
+
+            label {
+                color: $off-black;
+                &.active {
+                    color: $off-black;
+                }
+            }
+            
+            input[type=email]:focus:not([readonly]) + label {
+                color: $off-black;
             }
         }
     }
 }
 
-.modal p {
-    padding: 0.5em 0;
+@media #{$small-and-down} {
+    .sign-up {
+        width: 100%;
+    }
 }
