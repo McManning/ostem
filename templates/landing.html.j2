@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>oSTEM at The Ohio State University</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/vendor/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <!-- TEMP OSU navbar placeholder. Will eventually be replaced by the actual CSS/JS package -->
+        <div class="osu-navbar">
+            <div class="container">
+                <div class="right">
+                    <a href="#!">Help</a>
+                    <a href="#!">BuckeyeLink</a>
+                    <a href="#!">Map</a>
+                    <a href="#!">Find People</a>
+                    <a href="#!">Big Butts</a>
+                    <a href="#!">Search Ohio State</a>
+                </div>
+                <a class="logo" href="http://osu.edu" title="The Ohio State University">The Ohio State University</a>
+            </div>
+        </div>
+
+        <div class="container center">
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <p class="next-meeting flow-text large inverted">
+                        Our next meeting is 
+                        <span class="editable date" data-editable-id="nextMeetingDate">
+                            {{ editables.nextMeetingDate }}
+                        </span>
+                        at 
+                        <span class="editable location" data-editable-id="nextMeetingLocation">
+                            {{ editables.nextMeetingLocation }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <form class="sign-up">
+                <div class="input-field">
+                    <input id="email" type="email">
+                    <label for="email">Join our mailing list!</label>
+                    <button type="submit" value="submit" class="btn-floating signup green" style="display:none">
+                        <i class="material-icons">check</i>
+                    </button>
+                </div>
+                <span class="thanks" style="display:none">Thanks!</span>
+                <a href="https://www.facebook.com/groups/143348982418394/" target="_BLANK"><img src="/img/facebook.png"></a>
+            </form>
+
+        </div>  <!-- .section -->
+        <div class="description-blurb">
+        
+            <!-- Rainbow border -->
+            <div class="rainbow">
+                <div class="red darken-1"></div>
+                <div class="orange"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
+                <div class="blue"></div>
+                <div class="purple"></div>
+            </div>
+
+            <!-- Summary -->
+            <div class="container">
+                <div class="row">
+                    <div class="col offset-s2 s8 m4">
+                        <img class="responsive-img" src="img/ostem-logo.png">
+                    </div>
+                    <div class="col s12 m8">
+                        <p class="flow-text">
+                            oSTEM propels the gay, lesbian, bisexual, transgender and straight ally community forward with innovative opportunities for students in STEM fields.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- .description -->
+    </div> <!-- .hero -->
+
+    <div class="description container">
+        <div class="row">
+            <div class="col s12 offset-m4 m8">
+                <p class="editable flow-text" data-editable-id="extendedDescription">
+                    {{ editables.extendedDescription }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mailing List Archives -->
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <h1><span class="hide-on-small-only">Recent</span> Updates</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="collection">
+                    {% for mailing in mailings %}
+                    <li class="collection-item avatar">
+                        <a href="#news-modal-{{ mailing.date|date('U') }}" class="modal-trigger">
+                            <i class="material-icons circle green">email</i>
+                            <span class="title truncate">
+                                {{ mailing.subject }}
+                            </span>
+
+                            <!--span class="secondary-content">
+                                READ MORE
+                            </span-->
+                        </a>
+                        
+                        <p>Sent on <strong>{{ mailing.date|date('m/d/Y') }}</strong></p>
+
+                        <!-- Embed the modal right into the list item -->
+                        <div id="news-modal-{{ mailing.date|date('U') }}" class="modal">
+                            <div class="modal-content">
+                                <span class="right modal-close"><i class="material-icons">close</i></span>
+                                <h4>{{ mailing.subject }}</h4>
+                                <p>{{ mailing.message|raw }}</p>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership -->
+    <div class="container leadership">
+        <div class="row">
+            <div class="col m12">
+                <h1>Leadership</h1>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col s12 m6">
+                <h4>President</h4>
+                <h5 class="editable" data-editable-id="presidentName">
+                    {{ editables.presidentName }}
+                </h5>
+                <p>
+                    <a href="mailto:{{ editables.presidentEmail }}">
+                        <i class="material-icons">email</i><span class="editable" data-editable-id="presidentEmail">{{ editables.presidentEmail }}</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col s12 m6">
+                <h4>Vice President</h4>
+                <h5 class="editable" data-editable-id="vicePresidentName">
+                    {{ editables.vicePresidentName }}
+                </h5>
+                <p>
+                    <a href="mailto:{{ editables.vicePresidentEmail }}">
+                        <i class="material-icons">email</i><span class="editable" data-editable-id="vicePresidentEmail">{{ editables.vicePresidentEmail }}</span>
+                    </a>
+                </p>
+            </div>
+        </div> <!-- .row -->
+        <div class="row center">
+            <div class="col s12 m6">
+                <h4>Treasurer</h4>
+                <h5 class="editable" data-editable-id="treasurerName">
+                    {{ editables.treasurerName }}
+                </h5>
+                <p>
+                    <a href="mailto:{{ editables.treasurerEmail }}">
+                        <i class="material-icons">email</i><span class="editable" data-editable-id="treasurerEmail">{{ editables.treasurerEmail }}</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col s12 m6">
+                <h4>Advisor</h4>
+                <h5 class="editable" data-editable-id="advisorName">
+                    {{ editables.advisorName }}
+                </h5>
+                <p>
+                    <a href="mailto:{{ editables.advisorEmail }}">
+                        <i class="material-icons">email</i><span class="editable" data-editable-id="advisorEmail">{{ editables.advisorEmail }}</span>
+                    </a>
+                </p>
+            </div>
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+
+    <!-- Final Join Us conversion push -->
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <h1>Join Us!</h1>
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col s12">
+                <p class="next-meeting flow-text">
+                Our next meeting is 
+                <span class="editable date" data-editable-id="nextMeetingDate">
+                    {{ editables.nextMeetingDate }}
+                </span>
+                at 
+                <span class="editable location" data-editable-id="nextMeetingLocation">
+                    {{ editables.nextMeetingLocation }}
+                </span>
+                </p>
+                <p class="flow-text">
+                We would love to see you there!
+                </p>
+            </div>
+        </div>
+        <div class="row center">
+           
+            <form class="sign-up inverted">
+                <div class="input-field">
+                    <input id="email2" type="email">
+                    <label for="email2">Join our mailing list!</label>
+                    <button type="submit" value="submit" class="btn-floating signup green" style="display:none">
+                        <i class="material-icons">check</i>
+                    </button>
+                </div>
+                <span class="thanks" style="display:none">Thanks!</span>
+                <a href="https://www.facebook.com/groups/143348982418394/" target="_BLANK"><img src="/img/facebook.png"></a>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Placeholder mockup for google maps integration -->
+    <!--div class="map-mockup">
+        <img src="img/location-mockup.png">
+    </div-->
+
+    <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red">
+            <i class="large mdi-navigation-menu"></i>
+        </a>
+        <ul>
+            <li>
+                <a class="btn-floating blue tooltipped toggle-editables" data-position="left" data-tooltip="Edit Page Content">
+                    <i class="material-icons">mode_edit</i>
+                </a>
+            </li>
+            <li>
+                <a class="btn-floating green tooltipped" href="/newsletter/create" data-position="left" data-tooltip="Create a newsletter">
+                    <i class="material-icons">email</i>
+                </a>
+            </li>
+            <li>
+                <a class="btn-floating orange tooltipped" href="/logout" data-position="left" data-tooltip="Log out">
+                    <i class="material-icons">exit_to_app</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- standard OSU footer -->
+    <footer>
+        <!-- Rainbow border -->
+        <div class="rainbow">
+            <div class="red"></div>
+            <div class="orange"></div>
+            <div class="yellow"></div>
+            <div class="green"></div>
+            <div class="blue"></div>
+            <div class="purple"></div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                <!-- Page information and assistance -->
+                <div class="col s12 m9">
+                    <a href="http://www.osu.edu/"><img src="img/osu-web-footer.png" alt="The Ohio State University" title="The Ohio State University home page"></a>
+                    <p>&copy; 2015 | Student Academic Services Building | 281 W. Lane Ave. | Columbus, Ohio 43210 | <a href="tel:614-292-OHIO">614-292-OHIO</a></p>
+                    <p>Contact: <a href="mailto:{{ editables.advisorEmail }}">Advisor</a> | <a href="mailto:mcmanning.@osu.edu">Webmaster</a></p>
+                    <p><a href="mailto:mcmanning.1@osu.edu">Request</a> an alternate format of this page | <a href="http://hr.osu.edu/policy/resources/110nondiscrimnotice.pdf">Nondiscrimination notice</a></p>
+                </div>  <!-- .col -->
+
+                <!-- Social links -->
+                <!--div class="col hide-on-small-only m3">
+                    <ul class="right">
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                    </ul>
+                </div-->
+            </div> <!-- .row -->
+        </div> <!-- .container -->
+    </footer>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/materialize.min.js"></script>
+    <script src="js/app.js"></script>
+
+    </body>
+</html>
