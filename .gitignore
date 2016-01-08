@@ -5,3 +5,6 @@
 .sass-cache
 /node_modules
 /nocommit
+/vendor
+/composer.lock
+/cache
