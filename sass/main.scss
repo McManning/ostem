@@ -16,9 +16,15 @@ main {
 }
 
 
+i.material-icons {
+    vertical-align: top;
+}
+
 .hero {
     height: 100vh;
-    padding: 0;
+    // Offset upward so we maintain fullscreen height, but overlap OSU bar
+    margin-top: -42px;
+    padding-top: 42px;
 
     background: url('../img/union-softblur.jpg') no-repeat 50% 50% fixed;
     background-size: cover;
@@ -95,6 +101,7 @@ main {
     background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
     height: 42px;
     padding: 10px 0;
+    z-index: 1000;
 
     a.logo {
         height: 16px;

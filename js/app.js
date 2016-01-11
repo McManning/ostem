@@ -1,25 +1,4 @@
 
-function submitEmail($container) {
-
-    // Fake submission logic. TODO: Actually submit! 
-    $container
-        .removeClass('show-top')
-        .addClass('show-right')
-        .delay(2000)
-        .queue(function(next) {
-            $(this).removeClass('show-right')
-                .addClass('show-bottom')
-                .delay(2000)
-                .queue(function(next) {
-                    $(this).removeClass('show-bottom')
-                        .addClass('show-front');
-
-                    next();
-                });
-            next();
-        });
-}
-
 function enableEditables() {
     $('.editable')
         .attr('contenteditable', 'true')
@@ -34,6 +13,12 @@ function enableEditables() {
             $('.editable[data-editable-id="' + $(this).data('editable-id') + '"]')
                 .html($(this).html().trim());
         });
+
+    // Disable anchors so clicking editable ones won't submit
+    $('a').on('click.edit-mode', function(e) {
+        e.preventDefault();
+        return false;
+    });
 }
 
 function disableEditables() {
@@ -46,11 +31,14 @@ function disableEditables() {
             .removeAttr('contenteditable')
             .off('blur.editable');
 
-        payload[$(this).data('editable-id')] = $(this).html();
+        payload[$(this).data('editable-id')] = $(this).html().trim();
     });
 
-    // TODO: Some AJAX!
-    console.log(payload);
+    // Re-enable anchors
+    $('a').off('click.edit-mode');
+
+    // Push it to the server
+    $.post('/update', payload);
 }
 
 $(function() {
@@ -70,59 +58,47 @@ $(function() {
         edge: 'left'
     });
 
-    $('.sign-up-box input').keydown(function(e) {
-        if (e.which === 13) {
-            submitEmail($(this).closest('.sign-up-box'));
-        }
-    });
-
-    $('.sign-up-box button').click(function() {
-        submitEmail($(this).closest('.sign-up-box'));
-    })
-
-    $('.front').click(function() {
-        $(this).closest('.sign-up-box')
-            .removeClass('show-front')
-            .addClass('show-top')
-            .find('input')
-                .focus();
-    });
-
     $('.toggle-editables').click(function() {
         if ($(this).hasClass('active')) {
             $(this).removeClass('active');
+            $(this).find('i').html('mode_edit');
             disableEditables();
         } 
         else {
             $(this).addClass('active');
+            $(this).find('i').html('save');
             enableEditables();
         }
         return false;
     });
 
-    $('input').focus(function() {
-        var $parent = $(this).parent();
-
-        $parent.find('label').html('What\'s your primary email?');
-        $parent.find('.signup').show();
+    $('form.sign-up input').focus(function() {
+        $(this).siblings('label').html('What\'s your primary email?');
+        $(this).siblings('.signup').show();
     });
 
-    $('.sign-up input').blur(function() {
-        var $parent = $(this).parent();
+    $('form.sign-up input').blur(function() {
+        $(this).siblings('label').html('Join our mailing list!');
 
-        $parent.find('label').html('Join our mailing list!');
-
-        if (!$parent.find('label').hasClass('active')) {
-            $parent.find('.signup').hide();
+        if (!$(this).siblings('label').hasClass('active')) {
+            $(this).siblings('.signup').hide();
         }
     }); 
 
     $('form.sign-up').submit(function(e) {
+        var $form = $(this);
         var email = $(this).find('input').val();
 
         if (email.length) {
-            $(this).find('.input-field').hide();
-            $(this).find('.thanks').show();
+
+            $.post('/subscribe', $form.serialize())
+                .done(function() {
+                    $form.find('.input-field').hide();
+                    $form.find('.thanks').show();
+                })
+                .fail(function() {
+                    alert('Some sort of error occurred. That\'s not good :(');
+                });
         }
         
         e.preventDefault();

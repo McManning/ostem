@@ -1,52 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>oSTEM at The Ohio State University</title>
+{% extends 'layout.html.j2' %}
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/vendor/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-</head>
-<body>
+{% block content %}
 
     <!-- Hero -->
     <div class="hero">
-        <!-- TEMP OSU navbar placeholder. Will eventually be replaced by the actual CSS/JS package -->
-        <div class="osu-navbar">
-            <div class="container">
-                <div class="right">
-                    <a href="#!">Help</a>
-                    <a href="#!">BuckeyeLink</a>
-                    <a href="#!">Map</a>
-                    <a href="#!">Find People</a>
-                    <a href="#!">Big Butts</a>
-                    <a href="#!">Search Ohio State</a>
-                </div>
-                <a class="logo" href="http://osu.edu" title="The Ohio State University">The Ohio State University</a>
-            </div>
-        </div>
-
         <div class="container center">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
                     <p class="next-meeting flow-text large inverted">
                         Our next meeting is 
-                        <span class="editable date" data-editable-id="nextMeetingDate">
-                            {{ editables.nextMeetingDate }}
-                        </span>
+                        <span class="editable date" data-editable-id="nextMeetingDate">{{ editables.nextMeetingDate }}</span>
                         at 
-                        <span class="editable location" data-editable-id="nextMeetingLocation">
-                            {{ editables.nextMeetingLocation }}
-                        </span>
+                        <span class="editable location" data-editable-id="nextMeetingLocation">{{ editables.nextMeetingLocation }}</span>
                     </p>
                 </div>
             </div>
 
             <form class="sign-up">
                 <div class="input-field">
-                    <input id="email" type="email">
+                    <input id="email" name="email" type="email">
                     <label for="email">Join our mailing list!</label>
                     <button type="submit" value="submit" class="btn-floating signup green" style="display:none">
                         <i class="material-icons">check</i>
@@ -58,7 +30,7 @@
 
         </div>  <!-- .section -->
         <div class="description-blurb">
-        
+
             <!-- Rainbow border -->
             <div class="rainbow">
                 <div class="red darken-1"></div>
@@ -72,8 +44,11 @@
             <!-- Summary -->
             <div class="container">
                 <div class="row">
-                    <div class="col offset-s2 s8 m4">
+                    <div class="col offset-s2 s8 m4 center">
                         <img class="responsive-img" src="img/ostem-logo.png">
+
+                        <a href="#constitution-modal" class="modal-trigger"><i class="material-icons">book</i> Our Constitution</a>
+
                     </div>
                     <div class="col s12 m8">
                         <p class="flow-text">
@@ -88,9 +63,7 @@
     <div class="description container">
         <div class="row">
             <div class="col s12 offset-m4 m8">
-                <p class="editable flow-text" data-editable-id="extendedDescription">
-                    {{ editables.extendedDescription }}
-                </p>
+                <p class="editable flow-text" data-editable-id="extendedDescription">{{ editables.extendedDescription }}</p>
             </div>
         </div>
     </div>
@@ -135,6 +108,71 @@
         </div>
     </div>
 
+    <!-- Constitution -->
+    <div id="constitution-modal" class="modal">
+        <div class="modal-content">
+            <span class="right modal-close"><i class="material-icons">close</i></span>
+            <h3>Constitution</h3>
+            <h4>Article I – Name, Purpose, and Non-Discrimination Policy</h4>
+            <h5>Section 1: Name</h5>
+            <p>
+                Out in Science, Technology, Engineering, and Mathematics (oSTEM) is a chapter of the national Out in Science, Technology, Engineering, and Mathematics (oSTEM) organization.
+            </p>
+            <h5>Section 2: Purpose</h5>
+            <p>
+                oSTEM will provide services, support, education, and networking opportunities to students in science, technology, engineering, and mathematics (STEM) who identify as part of a gender, sex, or sexual minority (GSSM). oSTEM will also strive to engage community partners, OSU faculty and staff, and other advocates of GSSM STEM students.
+            </p>
+            <h5>Section 3: Non-Discrimination Policy</h5>
+            <p>
+                Any member affiliated with oSTEM shall not discriminate against any individual(s) for reasons of age, color, disability, sexual orientation, gender identity, gender expression, national origin, race, religion, sex, or veteran status.
+            </p>
+            <h4>Article II – Membership</h4>
+            <p>
+                Voting membership should be defined as limited to currently enrolled Ohio State students. Others such as faculty, alumni, professionals and staff are encouraged to become members but are not allowed to vote or run for Board.
+            </p>
+            <h4>Article III – Organization Leadership</h4>
+            <p>
+                Organization leaders (E-board) represent the general membership and are elected members from the organization’s voting membership. All E-board members – President, Vice President and Treasurer – are expected to attend all oSTEM E-board meetings, general meetings, and all oSTEM-sponsored events.
+            </p>
+            <h5>Section 1: President's Term and Duties</h5>
+            <p>
+                The President's term is for 1 academic year, from one month after an election to the one month after the next election. The President is determined by majority vote during an election in which any member who has attended at least 3 meetings is a valid candidate to vote and run for election. Members running for an office on the E-board may not vote for that office. The President is responsible for speaking on behalf of oSTEM, keeping meetings on time and on task, membership, finding contacts for programs and events, and acting as the main point of contact for the organization.
+            </p>
+            <h5>Section 2: Vice-President's Term and Duties</h5>
+            <p>
+                The Vice President's term is for 1 academic year, from one month after an election to the one month after the next election.  The Vice President is determined by majority votes during an election in which any member who has attended at least 3 meetings is a valid candidate to vote and run for election.  Members running for an office on the E-board may not vote for that office.  The Vice President is responsible for planning events and raising awareness in the straight ally community.
+            </p>
+            <h5>Section 3: Treasurer's Term and Duties</h5>
+            <p>
+                The Treasurer's term is for 1 academic year, from one month after an election to the one month after the next election.  The Treasurer is determined by majority votes during an election in which any member who has attended at least 3 meetings is a valid candidate to vote and to be elected. Members running for an office on the E-board may not vote for that office. The Treasurer is responsible for all monetary transactions, scheduling space for events, and posting event details to various University websites.
+            </p>
+            <h4>Article VI – Adviser Qualification Criteria</h4>
+            <p>
+                Advisers of oSTEM must be full-time members of the University faculty or Administrative and Professional Staff.  The individual may serve as adviser for an unlimited duration of time, until they no longer want to or cannot fulfill the duties that are assigned to them, or if the majority of the group believes it is in the group’s best interest to find a new adviser. The group must have a majority vote on this measure in order to relieve the person of their advising duties.  The adviser is responsible for working closely with the President and Vice-President to make sure they are on task, act as a tie breaker vote in any election, provide direction for the group and provide advice for anything that is asked from the organization.
+            </p>
+            <h4>Article VII – Required meetings and their frequency</h4>
+            <p>
+                oSTEM must hold one general meeting and hold one event involving a company or third party that will uphold the purpose of the organization every quarter except during Summer.
+            </p>
+            <h4>Article VIII – Amending the Constitution</h4>
+            <p>
+                Proposals must be sent to the mailing list by the President, Vice-President or Treasurer one week prior to a general meeting notifying the general body.  The proposal may be voted on either at the next meeting or in a way that's accessible by all members.
+            </p>
+            <h4>Article IX – Method of Dissolution of Organization</h4>
+            <p>
+                All assets must be donated to the <em>Out in Science, Technology, Engineering, and Mathematics</em> national group.  Any debts must be paid off by the standing E-board.
+            </p>
+            <h4>Article X - Removal of Members and Officers</h4>
+            <p>
+                Any officer may resign their position if they deem it necessary. To take effect, an officer must notify the faculty advisor, in writing, of their resignation. A copy of this letter must also be delivered to another E-board member. If a member is not performing their duties, the executive board will decide whether to remove the member from the group. 
+            </p>
+            <h4>Article XI - Impeachement</h4>
+            <p> 
+                Any officer, elected or appointed, is eligible for impeachment. A voting member of the organization can initiate a motion for impeachment, which must then be seconded by a second member. If the motion passes, the voting membership must then set a date for impeachment proceedings, which must take place at a general meeting no sooner than a week after the initial motion. The impeachment proceedings will consist of a debate among the general membership, with a simple majority of voting members required for cloture. The actual impeachment vote will follow, with a two-thirds majority of the membership. If it passes, approval by the adviser is required to complete impeachment. If an officer is successfully impeached, they are barred from appointed positions or running in elections until the next general election.
+            </p>
+        </div>
+    </div>
+
     <!-- Leadership -->
     <div class="container leadership">
         <div class="row">
@@ -145,9 +183,7 @@
         <div class="row center">
             <div class="col s12 m6">
                 <h4>President</h4>
-                <h5 class="editable" data-editable-id="presidentName">
-                    {{ editables.presidentName }}
-                </h5>
+                <h5 class="editable" data-editable-id="presidentName">{{ editables.presidentName }}</h5>
                 <p>
                     <a href="mailto:{{ editables.presidentEmail }}">
                         <i class="material-icons">email</i><span class="editable" data-editable-id="presidentEmail">{{ editables.presidentEmail }}</span>
@@ -156,9 +192,7 @@
             </div>
             <div class="col s12 m6">
                 <h4>Vice President</h4>
-                <h5 class="editable" data-editable-id="vicePresidentName">
-                    {{ editables.vicePresidentName }}
-                </h5>
+                <h5 class="editable" data-editable-id="vicePresidentName">{{ editables.vicePresidentName }}</h5>
                 <p>
                     <a href="mailto:{{ editables.vicePresidentEmail }}">
                         <i class="material-icons">email</i><span class="editable" data-editable-id="vicePresidentEmail">{{ editables.vicePresidentEmail }}</span>
@@ -169,9 +203,7 @@
         <div class="row center">
             <div class="col s12 m6">
                 <h4>Treasurer</h4>
-                <h5 class="editable" data-editable-id="treasurerName">
-                    {{ editables.treasurerName }}
-                </h5>
+                <h5 class="editable" data-editable-id="treasurerName">{{ editables.treasurerName }}</h5>
                 <p>
                     <a href="mailto:{{ editables.treasurerEmail }}">
                         <i class="material-icons">email</i><span class="editable" data-editable-id="treasurerEmail">{{ editables.treasurerEmail }}</span>
@@ -180,9 +212,7 @@
             </div>
             <div class="col s12 m6">
                 <h4>Advisor</h4>
-                <h5 class="editable" data-editable-id="advisorName">
-                    {{ editables.advisorName }}
-                </h5>
+                <h5 class="editable" data-editable-id="advisorName">{{ editables.advisorName }}</h5>
                 <p>
                     <a href="mailto:{{ editables.advisorEmail }}">
                         <i class="material-icons">email</i><span class="editable" data-editable-id="advisorEmail">{{ editables.advisorEmail }}</span>
@@ -203,13 +233,9 @@
             <div class="col s12">
                 <p class="next-meeting flow-text">
                 Our next meeting is 
-                <span class="editable date" data-editable-id="nextMeetingDate">
-                    {{ editables.nextMeetingDate }}
-                </span>
+                <span class="editable date" data-editable-id="nextMeetingDate">{{ editables.nextMeetingDate }}</span>
                 at 
-                <span class="editable location" data-editable-id="nextMeetingLocation">
-                    {{ editables.nextMeetingLocation }}
-                </span>
+                <span class="editable location" data-editable-id="nextMeetingLocation">{{ editables.nextMeetingLocation }}</span>
                 </p>
                 <p class="flow-text">
                 We would love to see you there!
@@ -220,7 +246,7 @@
            
             <form class="sign-up inverted">
                 <div class="input-field">
-                    <input id="email2" type="email">
+                    <input id="email2" name="email" type="email">
                     <label for="email2">Join our mailing list!</label>
                     <button type="submit" value="submit" class="btn-floating signup green" style="display:none">
                         <i class="material-icons">check</i>
@@ -261,45 +287,4 @@
         </ul>
     </div>
 
-    <!-- standard OSU footer -->
-    <footer>
-        <!-- Rainbow border -->
-        <div class="rainbow">
-            <div class="red"></div>
-            <div class="orange"></div>
-            <div class="yellow"></div>
-            <div class="green"></div>
-            <div class="blue"></div>
-            <div class="purple"></div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-
-                <!-- Page information and assistance -->
-                <div class="col s12 m9">
-                    <a href="http://www.osu.edu/"><img src="img/osu-web-footer.png" alt="The Ohio State University" title="The Ohio State University home page"></a>
-                    <p>&copy; 2015 | Student Academic Services Building | 281 W. Lane Ave. | Columbus, Ohio 43210 | <a href="tel:614-292-OHIO">614-292-OHIO</a></p>
-                    <p>Contact: <a href="mailto:{{ editables.advisorEmail }}">Advisor</a> | <a href="mailto:mcmanning.@osu.edu">Webmaster</a></p>
-                    <p><a href="mailto:mcmanning.1@osu.edu">Request</a> an alternate format of this page | <a href="http://hr.osu.edu/policy/resources/110nondiscrimnotice.pdf">Nondiscrimination notice</a></p>
-                </div>  <!-- .col -->
-
-                <!-- Social links -->
-                <!--div class="col hide-on-small-only m3">
-                    <ul class="right">
-                        <li><a href="#"><i class="material-icons">share</i></a></li>
-                        <li><a href="#"><i class="material-icons">share</i></a></li>
-                        <li><a href="#"><i class="material-icons">share</i></a></li>
-                    </ul>
-                </div-->
-            </div> <!-- .row -->
-        </div> <!-- .container -->
-    </footer>
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/vendor/materialize.min.js"></script>
-    <script src="js/app.js"></script>
-
-    </body>
-</html>
+{% endblock %}

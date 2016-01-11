@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>oSTEM at The Ohio State University</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    <!-- TEMP OSU navbar placeholder. Will eventually be replaced by the actual CSS/JS package -->
+    <div class="osu-navbar">
+        <div class="container">
+            <div class="right">
+                <a href="#!">Help</a>
+                <a href="#!">BuckeyeLink</a>
+                <a href="#!">Map</a>
+                <a href="#!">Find People</a>
+                <a href="#!">Big Butts</a>
+                <a href="#!">Search Ohio State</a>
+            </div>
+            <a class="logo" href="http://osu.edu" title="The Ohio State University">The Ohio State University</a>
+        </div>
+    </div>
+    
+    <main>
+    {% block content %}{% endblock %}
+    </main>
+
+    <!-- standard OSU footer -->
+    <footer>
+        <!-- Rainbow border -->
+        <div class="rainbow">
+            <div class="red"></div>
+            <div class="orange"></div>
+            <div class="yellow"></div>
+            <div class="green"></div>
+            <div class="blue"></div>
+            <div class="purple"></div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                <!-- Page information and assistance -->
+                <div class="col s12 m9">
+                    <a href="http://www.osu.edu/"><img src="img/osu-web-footer.png" alt="The Ohio State University" title="The Ohio State University home page"></a>
+                    <p>&copy; 2015 | Student Academic Services Building | 281 W. Lane Ave. | Columbus, Ohio 43210 | <a href="tel:614-292-OHIO">614-292-OHIO</a></p>
+                    <p>Contact: <a href="mailto:{{ editables.advisorEmail }}">Advisor</a> | <a href="mailto:mcmanning.@osu.edu">Webmaster</a></p>
+                    <p>
+                        <a href="mailto:mcmanning.1@osu.edu">Request</a> an alternate format of this page 
+                        | <a href="http://hr.osu.edu/policy/resources/110nondiscrimnotice.pdf">Nondiscrimination notice</a>
+                        | <a class="modal-trigger" href="#unsubscribe-modal">Unsubscribe</a>
+                    </p>
+                </div>  <!-- .col -->
+
+                <!-- Social links -->
+                <!--div class="col hide-on-small-only m3">
+                    <ul class="right">
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                        <li><a href="#"><i class="material-icons">share</i></a></li>
+                    </ul>
+                </div-->
+            </div> <!-- .row -->
+        </div> <!-- .container -->
+    </footer>
+
+    <!-- Unsubscribe -->
+    <div id="unsubscribe-modal" class="modal bottom-sheet">
+        <form class="">
+            <div class="modal-content">
+                <h4>Unsubscribe</h4>
+            
+                <div class="input-field">
+                    <input id="unsubscribe" name="email" type="email">
+                    <label for="unsubscribe">Enter your email</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" value="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Unsubscribe</button>
+            </div>
+        </form>
+    </div>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/materialize.min.js"></script>
+    <script src="js/app.js"></script>
+
+    </body>
+</html>

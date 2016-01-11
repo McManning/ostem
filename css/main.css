@@ -10632,9 +10632,14 @@ main {
   flex: 1 0 auto;
 }
 
+i.material-icons {
+  vertical-align: top;
+}
+
 .hero {
   height: 100vh;
-  padding: 0;
+  margin-top: -42px;
+  padding-top: 42px;
   background: url("../img/union-softblur.jpg") no-repeat 50% 50% fixed;
   background-size: cover;
   color: #FFF;
@@ -10796,6 +10801,7 @@ main {
   background: #333 url(http://brand.osu.edu/assets/site/osu_navbar/images/white/bg-navbar_red.png) center bottom repeat-x;
   height: 42px;
   padding: 10px 0;
+  z-index: 1000;
 }
 .osu-navbar a.logo {
   height: 16px;
