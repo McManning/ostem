@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-content">
+        <h1>Listserv</h1>
+
+        <form id="listserv-add">
+            <div class="input-field">
+                <input id="listserv-email" type="text" name="email">
+                <label for="listserv-email">Add a new email</label>
+                <button class="btn green right" type="submit" name="submit">Add</button>
+            </div>
+        </form>
+
+        <table id="listserv">
+            <thead>
+                <tr>
+                    <th width="5%"></th>
+                    <th>Email</th>
+                    <th>Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in listserv.getEmails() %}
+                <tr>
+                    <td><a href="#" class="unsubscribe"><i class="material-icons red-text">remove_circle</i></a></td>
+                    <td class="email" data-uuid="{{ user.uuid }}">{{ user.email }}</td>
+                    <td class="date" data-order="{{ user.date|date('Ymd') }}">{{ user.date|date('m/d/Y')}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
