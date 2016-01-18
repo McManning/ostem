@@ -1,0 +1,30 @@
+{% extends 'layout.html.j2' %}
+
+{% block content %}
+    
+    {% if not email %}
+        <p class="flow-text center">
+            Invalid subscriber ID
+        </p>
+        <p class="center">
+            If you think this was in error, contact the <a href="mailto:">administrator</a>
+        </p>
+    {% elseif unsubscribed %}
+        <p class="flow-text center">
+            You have been unsubscribed :(
+        </p>
+    {% else %}
+        <form class="center" action="{{ currentUrl() }}" method="POST">
+            <p class="flow-text center">
+                Subscribed as {{ email }}
+            </p>
+
+            <button type="submit" name="submit" class="btn red">Unsubscribe</button>
+        </form>
+    {% endif %}
+
+    <p class="center">
+        <a href="/">(back to oSTEM)</a>
+    </p>
+{% endblock %}
+

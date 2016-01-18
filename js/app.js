@@ -38,7 +38,7 @@ function disableEditables() {
     $('a').off('click.edit-mode');
 
     // Push it to the server
-    $.post('/update', payload);
+    $.post('/admin/update', payload);
 }
 
 $(function() {
@@ -104,43 +104,193 @@ $(function() {
         e.preventDefault();
         return false;
     });
+
+    // If we're on the admin page, initialise Quill editor for the newsletter
+    if ($('#newsletter').length > 0) {
+        var editor = new Quill('#newsletter-editor', {
+            modules: {
+                'toolbar': { container: '#newsletter-toolbar' },
+                'link-tooltip': true
+            },
+            theme: 'snow'
+        });
+
+        /**
+         * Submit a newsletter to be sent to the mailing list
+         */
+        $('#newsletter').submit(function(e) {
+            
+            var $button = $(this).find('button[type="submit"]');
+
+            if (!$button.hasClass('disabled')) {
+                if (editor.getText().trim().length < 1) {
+                    alert('You must enter some content!');
+                    e.preventDefault();
+                    return false;
+                }
+
+                if ($('#newsletter-subject').val().length < 1) {
+                    alert('You must specify a newsletter subject!');
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (confirm('Are you sure you want to send this to all subscribers?')) {
+                    // Clone HTML to a hidden input so we can submit it with the form
+                    $('#newsletter-html').val(editor.getHTML());
+
+                    $button
+                        .addClass('disabled')
+                        .html('<i class="material-icons">email</i> Sending...');
+
+                    $.post('/admin/newsletter/send', 
+                            $('#newsletter').serialize()
+                        )
+                        .fail(function() {
+                            $button
+                                .removeClass('disabled')
+                                .html('<i class="material-icons">send</i> Send Newsletter');
+                            alert('An error has occurred!');
+                        })
+                        .done(function() {
+                            $button
+                                .removeClass('disabled')
+                                .html('<i class="material-icons">send</i> Send Newsletter');
+                            editor.setHTML('');
+                            $('#newsletter-html').val('');
+                            $('#newsletter-subject').val('');
+                            
+                            alert('Newsletter has been sent!');
+                        });
+                }
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        /**
+         * Save draft button for our newsletter editor
+         */
+        $('#newsletter .save').click(function(e) {
+            var $button = $(this);
+
+            if (!$button.hasClass('disabled')) {
+                $button.addClass('disabled');
+
+                // Clone HTML to a hidden input so we can submit it with the form
+                $('#newsletter-html').val(editor.getHTML());
+
+                $.post('/admin/newsletter/draft', 
+                        $('#newsletter').serialize()
+                    )
+                    .fail(function() {
+                        $button.removeClass('disabled');
+                        alert('An error occurred while saving!');
+                    })
+                    .done(function() {
+                        $button.removeClass('disabled');
+                    });
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        /**
+         * Clear draft button for our newsletter editor
+         */
+        $('#newsletter .clear').click(function(e) {
+            if (confirm('Are you sure you want to clear the current draft?')) {
+                editor.setHTML('');
+                $('#newsletter-html').val('');
+                $('#newsletter-subject').val('');
+
+                $.post('/admin/newsletter/draft', 
+                    $('#newsletter').serialize()
+                );
+                // Silently ignore errors in clearing the draft
+
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Admin profile editor
+     */        
+    $('#profile').submit(function(e) {
+        var $form = $(this);
+
+        var $p1 = $form.find('#password');
+        var $p2 = $form.find('#password2');
+
+        // If there's a password change
+        if ($p1.val().length > 0) {
+
+            // Sanity check
+            if ($p1.val() !== $p2.val()) {
+                alert('Passwords must match!');
+                e.preventDefault();
+                return false;
+            }
+
+            // Post updates
+            $.post('/admin/profile', $form.serialize())
+                .fail(function() {
+                    alert('An error has occurred!');
+                })
+                .done(function() {
+                    alert('Profile updated!');
+
+                    // Clear inputs
+                    $p1.val('');
+                    $p2.val('');
+                });
+        }
+
+        e.preventDefault();
+        return false;
+    });
+    
+    if ($('#listserv').length > 0) {
+        var listservTable = $('#listserv').DataTable();
+
+        $('#listserv-add').submit(function(e) {
+            $.post('/subscribe', $(this).serialize())
+                .fail(function() {
+                    alert('Err!');
+                })
+                .done(function(response) {
+                    // TODO: add to table?
+                    //listservTable.row.add(response).draw(false);
+                    alert('Added! (Note: They won\'t be in the table until you refresh)');
+                });
+
+            e.preventDefault();
+            return false; 
+        });
+
+        $('#listserv').on('click', 'a.unsubscribe', function() {
+
+            var $row = $(this).closest('tr');
+            var email = $row.find('td.email').html();
+            var uuid = $row.find('td.email').data('uuid');
+
+            if (confirm('Are you sure you want to unsubscribe ' + email + '?')) {
+                $.post('/unsubscribe/' + uuid)
+                    .fail(function() {
+                        alert('An error has occurred!');
+                    })
+                    .done(function() {
+                        // Axe it from the datatable
+                        listservTable.row($row).remove().draw();
+                    });
+            }
+
+            return false; 
+        });
+
+    }
 });
-
-/* TODO: Let them browse old emails?
-function addNews() {
-    var typeIcon = 'email';
-    var title = 'New Message';
-    var date = '9/14/2015';
-    var message = '<p>oSTEM is heading out to <strong>Kingmakers</strong>, the game parlour. Kingsmakers has hundreds of board and card games that we can play, but it <strong>costs $5 for the night.</strong></p>'+
-        '<p>We\'ll meet at <strong>5:30PM</strong> at the <strong>Brutus status in the Ohio Union.</strong> From there, we\'ll head out for dinner before going to Kingsmakers.</p>'+
-        '<strong>Other News</strong>'+
-        '<p>Results from the poll are in and the majority of people said that they prefer Wednesday meetings. So our meeting time next semester will continue to be on Wednesdays.</p>';
-
-    var id = $('#news').children('li').length + 1;
-
-    var $li = $('<li></li>')
-                .addClass('collection-item')
-                .addClass('avatar')
-                .html(
-                    '<i class="material-icons circle green">' + typeIcon + '</i>'+
-                    '<span class="title truncate">' + title + '</span>'+
-                    '<p>Sent on <strong>' + date + '</strong></p>'+
-                    '<a href="#news-modal-' + id + '" class="secondary-content modal-trigger">READ MORE</a>'+
-                    '<div id="news-modal-' + id + '" class="modal">'+
-                    '    <div class="modal-content">'+
-                    '        <span class="right modal-close"><i class="material-icons">close</i></span>'+
-                    '        <h4>' + title + '</h4>'+ message +
-                    '    </div>'+
-                    '</div>'
-                )
-                .hide();
-
-    $('#news').append($li);
-
-    $li.slideDown();
-
-    // Initialise modal plugin on the new element
-    $('a[href="#news-modal-' + id + '"]').leanModal();
-}*/
-
-
