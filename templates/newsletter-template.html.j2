@@ -1,0 +1,83 @@
+<html>
+<head>
+<style type="text/css">
+
+    body {
+        color: #606060;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+    }
+
+    p, ul, ol {
+        margin: 0;
+    }
+
+    a {
+        color: #2196F3;
+        text-decoration: none;
+    }
+
+    h1 {
+        font-weight: 500;
+        font-size: 40px;
+        display: inline;
+    }
+
+    .header {
+        min-height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .header img {
+       float: right;
+    }
+
+    .footer {
+        font-style: italic;
+        font-size: 11px;
+        line-height: 20px;
+        margin-top: 20px;
+    }
+
+    .footer p {
+        margin: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+        .header img {
+            float: none;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+    }
+
+</style> 
+</head>
+<body>
+
+<img src="{{ baseUrl() }}/img/email-logo.png">
+<h1>{{ subject }}</h1>
+
+<p>
+    {{ message|raw }}
+</p>
+
+<strong>Your e-mail address is kept confidential and never shared with other users.</strong>
+<p>
+    Copyright &copy; {{ today|date('Y') }} Out in Science, Technology, Engineering and Mathematics at The Ohio State University. All rights reserved.
+</p>
+<p>
+    To unsubscribe, go to
+    <a href="{{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}">
+        {{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}
+    </a>
+</p>
+</body>
+</html>
