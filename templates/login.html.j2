@@ -1,0 +1,22 @@
+
+{% extends 'layout.html.j2' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <form class="col s12 m6 offset-m3 center" role="form" name="login" id="login" method="post">
+                <h2>Please log in</h2>
+                {% if flash['error'] is defined %}
+                <div class="alert alert-danger">
+                    {{ flash.error }}
+                </div>
+                {% endif %}
+                <input type="text" name="email" placeholder="Email" value="{{ email }}" autofocus required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button class="btn green" type="submit">Log in</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

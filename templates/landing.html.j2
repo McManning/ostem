@@ -78,12 +78,12 @@
         <div class="row">
             <div class="col s12">
                 <ul class="collection">
-                    {% for mailing in mailings %}
+                    {% for newsletter in newsletters %}
                     <li class="collection-item avatar">
-                        <a href="#news-modal-{{ mailing.date|date('U') }}" class="modal-trigger">
+                        <a href="#news-modal-{{ newsletter.date|date('U') }}" class="modal-trigger">
                             <i class="material-icons circle green">email</i>
                             <span class="title truncate">
-                                {{ mailing.subject }}
+                                {{ newsletter.subject }}
                             </span>
 
                             <!--span class="secondary-content">
@@ -91,14 +91,14 @@
                             </span-->
                         </a>
                         
-                        <p>Sent on <strong>{{ mailing.date|date('m/d/Y') }}</strong></p>
+                        <p>Sent on <strong>{{ newsletter.date|date('m/d/Y') }}</strong></p>
 
                         <!-- Embed the modal right into the list item -->
-                        <div id="news-modal-{{ mailing.date|date('U') }}" class="modal">
+                        <div id="news-modal-{{ newsletter.date|date('U') }}" class="modal">
                             <div class="modal-content">
                                 <span class="right modal-close"><i class="material-icons">close</i></span>
-                                <h4>{{ mailing.subject }}</h4>
-                                <p>{{ mailing.message|raw }}</p>
+                                <h4>{{ newsletter.subject }}</h4>
+                                <p>{{ newsletter.message|raw }}</p>
                             </div>
                         </div>
                     </li>
@@ -264,6 +264,7 @@
         <img src="img/location-mockup.png">
     </div-->
 
+    {% if role == 'admin' %}
     <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
         <a class="btn-floating btn-large red">
             <i class="large mdi-navigation-menu"></i>
@@ -275,8 +276,8 @@
                 </a>
             </li>
             <li>
-                <a class="btn-floating green tooltipped" href="/newsletter/create" data-position="left" data-tooltip="Create a newsletter">
-                    <i class="material-icons">email</i>
+                <a class="btn-floating green tooltipped" href="/admin" data-position="left" data-tooltip="Dashboard">
+                    <i class="material-icons">dashboard</i>
                 </a>
             </li>
             <li>
@@ -286,5 +287,6 @@
             </li>
         </ul>
     </div>
+    {% endif %}
 
 {% endblock %}
