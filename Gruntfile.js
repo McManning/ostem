@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    style: 'expanded' // compressed
+                    style: 'compressed' //'expanded'
                 },
                 files: {
                     'css/main.css': 'sass/main.scss'
@@ -65,5 +65,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
 
     // Full build task
-    grunt.registerTask('default', ['jshint', /*'uglify',*/ 'sass']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'sass']);
 };
