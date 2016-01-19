@@ -23,10 +23,10 @@ class User {
                     email=:email
             ");
 
-            $statement->execute([
+            $statement->execute(array(
                 'email' => $this->email,
                 'password' => password_hash($password, PASSWORD_DEFAULT)
-            ]);
+            ));
             
         } catch (\PDOException $e) {
             die(sprintf('DB error: %s', $e->getMessage()));

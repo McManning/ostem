@@ -99,7 +99,7 @@ class Newsletter {
                         id=:id
                 ");
 
-                $statement->execute([
+                $statement->execute(array(
                     'id' => $this->id,
                     'subject' => $this->subject,
                     'message' => $this->message,
@@ -107,7 +107,7 @@ class Newsletter {
                     'sender' => $this->sender,
                     'term' => $this->term,
                     'sent' => $this->sent
-                ]);
+                ));
             } else {
                 $statement = $this->db->prepare("
                     INSERT INTO  
@@ -116,14 +116,14 @@ class Newsletter {
                         (:subject, :message, :date, :sender, :term, :sent) 
                 ");
 
-                $statement->execute([
+                $statement->execute(array(
                     'subject' => $this->subject,
                     'message' => $this->message,
                     'date' => $this->date->format('Y-m-d H:i:s'),
                     'sender' => $this->sender,
                     'term' => $this->term,
                     'sent' => $this->sent
-                ]);
+                ));
             }
             
         } catch (\PDOException $e) {
@@ -140,7 +140,7 @@ class Newsletter {
      */
     public static function getRecent(\PDO $db)
     {
-        $recent = [];
+        $recent = array();
         try {
             $statement = $db->prepare("
                 SELECT
@@ -196,13 +196,13 @@ class Newsletter {
         foreach ($emails as $email) {
 
             // Render out our email template
-            $body = $view->fetch('newsletter-template.html.j2', [
+            $body = $view->fetch('newsletter-template.html.j2', array(
                 'today' => $today,
                 'sender' => $this->sender,
                 'subject' => $this->subject,
                 'message' => $this->message,
                 'uuid' => $email->uuid
-            ]);
+            ));
 
             // TODO: Send to mailing list!
             file_put_contents('cache/email-' . $email->uuid . '.html', $body);

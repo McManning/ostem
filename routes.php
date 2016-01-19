@@ -1,19 +1,19 @@
 <?php
 
 // Middleware inclusions (unfortunately not PSR-4 autoloaded)
-$authenticate = require __DIR__ . '/middleware/authenticate.php';
+// $authenticate = require __DIR__ . '/middleware/authenticate.php';
 
 $app->get('/', function () use ($app) {
 
     $editables = new OSTEM\Editables();
     $newsletters = OSTEM\Newsletter::getRecent($app->db);
 
-    $app->render('landing.html.j2', [
+    $app->render('landing.html.j2', array(
         // Get last 5 emails created in the current term 
         //'mailings' => array_slice(reset($mailings->terms), 0, 5),
         'newsletters' => $newsletters,
         'editables' => $editables
-    ]);
+    ));
 });
 
 /**
@@ -33,10 +33,10 @@ $app->map('/unsubscribe/:uuid', function ($uuid) use ($app) {
         $listserv->unsubscribe($uuid);
     }
 
-    $app->render('unsubscribe.html.j2', [
+    $app->render('unsubscribe.html.j2', array(
         'email' => $email,
         'unsubscribed' => $app->request->isPost()
-    ]);
+    ));
 })->via('GET', 'POST')->name('unsubscribe');
 
 /**
@@ -47,9 +47,9 @@ $app->post('/subscribe', function () use ($app) {
 
     if (!$email) {
         $app->contentType('application/json');
-        $app->halt(400, json_encode((object)[
+        $app->halt(400, json_encode((object)array(
             'error' => 'Expected email'
-        ]));
+        )));
     }
 
     $listserv = new OSTEM\Listserv($app->db);
@@ -79,9 +79,9 @@ $app->map('/login', function () use ($app) {
         }
     }
 
-    $app->render('login.html.j2', [
+    $app->render('login.html.j2', array(
         'email' => $email
-    ]);
+    ));
 
 })->via('GET', 'POST')->name('login');
 
@@ -105,10 +105,10 @@ $app->group('/admin', function () use ($app) {
         $newsletter = new OSTEM\Newsletter($app->db);
         $newsletter->loadDraft();
 
-        $app->render('admin/dashboard.html.j2', [
+        $app->render('admin/dashboard.html.j2', array(
             'listserv' => $listserv,
             'newsletter' => $newsletter
-        ]);
+        ));
     });
 
     /**
@@ -174,9 +174,9 @@ $app->group('/admin', function () use ($app) {
             } 
             catch (\Exception $e) {
                 $app->contentType('application/json');
-                $app->halt(400, json_encode((object)[
+                $app->halt(400, json_encode((object)array(
                     'error' => $e->getMessage()
-                ]));
+                )));
             }
         });
 
@@ -197,9 +197,9 @@ $app->group('/admin', function () use ($app) {
             } 
             catch (\Exception $e) {
                 $app->contentType('application/json');
-                $app->halt(400, json_encode((object)[
+                $app->halt(400, json_encode((object)array(
                     'error' => $e->getMessage()
-                ]));
+                )));
             }
         });
     });

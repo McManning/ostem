@@ -27,7 +27,7 @@ date_default_timezone_set('America/New_York');
 if (php_sapi_name() == 'cli-server') {
     define('DATA_DIR', dirname(__FILE__) . '/php-data/');
 
-    $extensions = ['css', 'map', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'js', 'json', ];
+    $extensions = array('css', 'map', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'js', 'json');
     $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     if (in_array($ext, $extensions)) {
@@ -45,17 +45,17 @@ if (php_sapi_name() == 'cli-server') {
 }
 
 // App configurations
-$app = new \Slim\Slim([
+$app = new \Slim\Slim(array(
     'debug' => false,
     'view' => new \Slim\Views\Twig()
-]);
+));
 
 // Configure PDO Adapter for authentication
-$app->db = new \PDO('sqlite:' . DATA_DIR . 'ostem.db', null, null, [
+$app->db = new \PDO('sqlite:' . DATA_DIR . 'ostem.db', null, null, array(
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
     \PDO::ATTR_EMULATE_PREPARES => true, // Required by Sqlite3
     \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-]);
+));
 $adapter = new PdoAdapter(
     $app->db,
     'users',
@@ -88,9 +88,9 @@ $app->error(function (\Exception $e) use ($app) {
 
     // Handle the possible 403 the middleware can throw
     if ($e instanceof HttpForbiddenException) {
-        return $app->render('403.html.j2', [
+        return $app->render('403.html.j2', array(
             'e' => $e
-        ], 403);
+        ), 403);
     }
 
     if ($e instanceof HttpUnauthorizedException) {
@@ -99,9 +99,9 @@ $app->error(function (\Exception $e) use ($app) {
 
     // Zend ACL can't find a route, throw up a 404
     if ($e instanceof InvalidArgumentException) {
-        return $app->render('404.html.j2', [
+        return $app->render('404.html.j2', array(
             'e' => $e
-        ], 404);
+        ), 404);
     }
 
     // TODO: Handling other errors here...
@@ -110,17 +110,17 @@ $app->error(function (\Exception $e) use ($app) {
 
 // Twig configurations
 $view = $app->view();
-$view->parserOptions = [
+$view->parserOptions = array(
     'debug' => true,
     'cache' => dirname(__FILE__) . '/cache',
     'auto_reload' => true,
     'autoescape' => true,
-];
+);
 
-$view->parserExtensions = [
+$view->parserExtensions = array(
     new \Slim\Views\TwigExtension(),
     new \Twig_Extension_Debug(),
-];
+);
 
 // Add a before dispatch hook to ensure the view has user data, if set
 $app->hook('slim.before.dispatch', function () use ($app) {
@@ -137,10 +137,10 @@ $app->hook('slim.before.dispatch', function () use ($app) {
         );
     }
     
-    $app->view->appendData([
+    $app->view->appendData(array(
         'user' => $user,
         'role' => $role
-    ]);
+    ));
 });
 
 require __DIR__ . '/routes.php';

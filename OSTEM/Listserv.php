@@ -20,7 +20,7 @@ class Listserv {
     public function getEmails()
     {
         if (!$this->emails) {
-            $this->emails = [];
+            $this->emails = array();
             
             try {
                 $statement = $this->db->prepare("
@@ -36,12 +36,12 @@ class Listserv {
                 $rows = $statement->fetchAll();
 
                 foreach ($rows as $row) {
-                    $this->emails[] = (object)[
+                    $this->emails[] = (object)array(
                         'id' => $row['id'],
                         'uuid' => $row['uuid'],
                         'email' => $row['email'],
                         'date' => new \DateTime($row['date'])
-                    ];
+                    );
                 }
             } catch (\PDOException $e) {
                 // die(sprintf('DB error: %s', $e->getMessage()));
@@ -72,9 +72,9 @@ class Listserv {
                     uuid = :uuid
             ");
 
-            $statement->execute([
+            $statement->execute(array(
                 'uuid' => $uuid
-            ]);
+            ));
             $rows = $statement->fetchAll();
 
             if (!empty($rows)) {
@@ -106,9 +106,9 @@ class Listserv {
                 COLLATE NOCASE
             ");
 
-            $statement->execute([
+            $statement->execute(array(
                 'email' => $email
-            ]);
+            ));
 
             $rows = $statement->fetchAll();
             return count($rows) > 0;
@@ -143,11 +143,11 @@ class Listserv {
                     (:uuid, :email, :date)
             ");
 
-            $statement->execute([
+            $statement->execute(array(
                 'uuid' => str_replace('.', '', uniqid('', true)),
                 'email' => $email,
                 'date' => $date->format('Y-m-d H:i:s')
-            ]);
+            ));
         } catch (\PDOException $e) {
             //die(sprintf('DB error: %s', $e->getMessage()));
             // TODO: Log something
@@ -172,9 +172,9 @@ class Listserv {
                     uuid = :uuid
             ");
 
-            $statement->execute([
+            $statement->execute(array(
                 'uuid' => $uuid
-            ]);
+            ));
         } catch (\PDOException $e) {
             // die(sprintf('DB error: %s', $e->getMessage()));
             // TODO: Log something
