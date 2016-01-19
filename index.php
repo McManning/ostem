@@ -2,7 +2,6 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use JeremyKendall\Password\PasswordValidator;
 use JeremyKendall\Slim\Auth\Adapter\Db\PdoAdapter;
 use JeremyKendall\Slim\Auth\Bootstrap;
 use JeremyKendall\Slim\Auth\Exception\HttpForbiddenException;
@@ -60,8 +59,7 @@ $adapter = new PdoAdapter(
     $app->db,
     'users',
     'email',
-    'password',
-    new PasswordValidator()
+    'password'
 );
 
 /* Re-enable if I want more control over session storage.

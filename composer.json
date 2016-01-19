@@ -1,12 +1,13 @@
 {
     "require": {
-        "php": ">=5.3.7",
+        "php": ">=5.3.3",
         "slim/slim": "~2.0",
         "slim/views": "^0.1.3",
         "twig/twig": "^1.23",
-        "jeremykendall/slim-auth": "~1.0",
-        "zendframework/zend-stdlib": "2.5.1",
-        "zendframework/zend-eventmanager": "2.5.1"
+        "jeremykendall/slim-auth": "0.0.2-alpha",
+        "zendframework/zend-stdlib": "2.2.10",
+        "zendframework/zend-eventmanager": "2.2.10",
+        "zendframework/zend-authentication": "2.2.10"
     },
     "autoload": {
         "psr-4": { "OSTEM\\": "OSTEM/" }
