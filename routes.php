@@ -90,7 +90,11 @@ $app->map('/login', function () use ($app) {
  */
 $app->get('/logout', function () use ($app) {
     // TODO: Technically shouldn't be GET, since it should be idempotent.
-    $app->authenticator->logout();
+    //$app->authenticator->logout();
+    if ($app->auth->hasIdentity()) {
+        $app->auth->clearIdentity();
+    }    
+
     $app->redirect('/');
 });
 
