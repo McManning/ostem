@@ -31,6 +31,10 @@ $app->map('/unsubscribe/:uuid', function ($uuid) use ($app) {
     // Otherwise, we show a form to confirm
     if ($app->request->isPost()) {
         $listserv->unsubscribe($uuid);
+        
+        $app->log->info('Removed from listserv', array(
+            'email' => $email
+        ));
     }
 
     $app->render('unsubscribe.html.j2', array(
@@ -55,6 +59,10 @@ $app->post('/subscribe', function () use ($app) {
     $listserv = new OSTEM\Listserv($app->db);
     $listserv->subscribe($email);
 
+    $app->log->info('Added to listserv', array(
+        'email' => $email
+    ));
+
     $app->response->setStatus(201); // CREATED
 });
 
@@ -76,6 +84,12 @@ $app->map('/login', function () use ($app) {
         } else {
             $messages = $result->getMessages();
             $app->flashNow('error', $messages[0]);
+
+            $app->log->warning('Failed login attempt', array(
+                'email' => $email,
+                'ip' => $app->request->getIp(),
+                'headers' => $app->request->headers()
+            ));
         }
     }
 
@@ -146,6 +160,12 @@ $app->group('/admin', function () use ($app) {
         $user = $app->view->getData('user');
 
         $user->updatePassword($app->request->post('password'));
+
+        $app->log->info('User updated password', array(
+            'user' => $user->email,
+            'ip' => $app->request->getIp(),
+            'headers' => $app->request->headers()
+        ));
     });
 
     /**
@@ -175,8 +195,18 @@ $app->group('/admin', function () use ($app) {
                 $newsletter->subject = $app->request->post('newsletter-subject');
                 $newsletter->sender = $user->email;
                 $newsletter->save();
+
+                $app->response->setStatus(201);
             } 
             catch (\Exception $e) {
+
+                $app->log->error('Failed to save newsletter draft', array(
+                    'user' => $user->email,
+                    'ip' => $app->request->getIp(),
+                    'headers' => $app->request->headers(),
+                    'exception' => (string)$e
+                ));
+
                 $app->contentType('application/json');
                 $app->halt(400, json_encode((object)array(
                     'error' => $e->getMessage()
@@ -198,8 +228,24 @@ $app->group('/admin', function () use ($app) {
                 $newsletter->sender = $user->email;
 
                 $newsletter->send($app->view);
+
+                $app->log->info('Newsletter sent', array(
+                    'user' => $user->email,
+                    'ip' => $app->request->getIp(),
+                    'headers' => $app->request->headers()
+                ));
+
+                $app->response->setStatus(201);
             } 
             catch (\Exception $e) {
+
+                $app->log->error('Failed to send newsletter', array(
+                    'user' => $user->email,
+                    'ip' => $app->request->getIp(),
+                    'headers' => $app->request->headers(),
+                    'exception' => (string)$e
+                ));
+
                 $app->contentType('application/json');
                 $app->halt(400, json_encode((object)array(
                     'error' => $e->getMessage()

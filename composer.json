@@ -7,7 +7,8 @@
         "jeremykendall/slim-auth": "0.0.2-alpha",
         "zendframework/zend-stdlib": "2.2.10",
         "zendframework/zend-eventmanager": "2.2.10",
-        "zendframework/zend-authentication": "2.2.10"
+        "zendframework/zend-authentication": "2.2.10",
+        "monolog/monolog": "^1.17"
     },
     "autoload": {
         "psr-4": { "OSTEM\\": "OSTEM/" }

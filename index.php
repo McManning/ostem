@@ -2,6 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 use JeremyKendall\Slim\Auth\Adapter\Db\PdoAdapter;
 use JeremyKendall\Slim\Auth\Bootstrap;
 use JeremyKendall\Slim\Auth\Exception\HttpForbiddenException;
@@ -25,6 +28,7 @@ date_default_timezone_set('America/New_York');
 // Handle static files when running PHP locally
 if (php_sapi_name() == 'cli-server') {
     define('DATA_DIR', dirname(__FILE__) . '/php-data/');
+    define('LOG_DIR', dirname(__FILE__) . '/logs/');
 
     $extensions = array('css', 'map', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'js', 'json');
     $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
@@ -41,13 +45,27 @@ if (php_sapi_name() == 'cli-server') {
 } else {
     // TODO: Not exposed in the script, jeeze. 
     define('DATA_DIR', '/usr/local/webs/ostem/php-data/');
+    define('LOG_DIR', '/usr/local/webs/ostem/php-data/logs/');
 }
 
 // App configurations
 $app = new \Slim\Slim(array(
     'debug' => false,
-    'view' => new \Slim\Views\Twig()
+    'view' => new \Slim\Views\Twig(),
+    'log.enabled' => false
 ));
+
+// Replace Slim's logger with Monolog
+$app->container->singleton('log', function() {
+
+    $logger = new Logger('OSTEM');
+    $logger->pushHandler(new StreamHandler(
+        LOG_DIR . date('Y-m-d') . '.log', 
+        Logger::DEBUG
+    ));
+    
+    return $logger;
+});
 
 // Configure shared PDO adapter
 $app->container->singleton('db', function() {
@@ -89,6 +107,13 @@ $app->error(function (\Exception $e) use ($app) {
 
     // Handle the possible 403 the middleware can throw
     if ($e instanceof HttpForbiddenException) {
+        $app->log->warning('403 (Forbidden) Attempt', array(
+            'path' => $app->request->getPath(),
+            'ip' => $app->request->getIp(),
+            'headers' => $app->request->headers(),
+            'exception' => (string)$e
+        ));
+
         return $app->render('403.html.j2', array(
             'e' => $e
         ), 403);
@@ -100,13 +125,36 @@ $app->error(function (\Exception $e) use ($app) {
 
     // Zend ACL can't find a route, throw up a 404
     if ($e instanceof InvalidArgumentException) {
+        $app->log->warning('404 Attempt', array(
+            'path' => $app->request->getPath(),
+            'ip' => $app->request->getIp(),
+            'headers' => $app->request->headers(),
+            'exception' => (string)$e
+        ));
+
         return $app->render('404.html.j2', array(
             'e' => $e
         ), 404);
     }
 
-    // TODO: Handling other errors here...
-    throw $e;
+    // Everything else, assume 500 level
+    $app->log->warning('Server Error', array(
+        'path' => $app->request->getPath(),
+        'ip' => $app->request->getIp(),
+        'headers' => $app->request->headers(),
+        'exception' => (string)$e
+    ));
+        
+    $app->render('500.html.j2', array(
+        'e' => $e
+    ), 500);
+});
+
+// Additional error handling for other 404's 
+$app->notFound(function () use ($app) {
+
+    // Throw out the same crap Zend does for 404ing auth routes
+    throw new InvalidArgumentException();
 });
 
 // Twig configurations
@@ -125,6 +173,7 @@ $view->parserExtensions = array(
 
 // Add a before dispatch hook to ensure the view has user data, if set
 $app->hook('slim.before.dispatch', function () use ($app) {
+
     $hasIdentity = $app->auth->hasIdentity();
     $identity = $app->auth->getIdentity();
     $role = ($hasIdentity) ?  : 'guest';
