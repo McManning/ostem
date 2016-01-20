@@ -20,10 +20,17 @@
                 <div class="right"><img src="/img/email-logo.png"></div>
             </h2>
             <h5>Logged in as {{ user.email }} <a href="/logout">(logout)</a></h5>
-            <div class="card-panel blue">
-                <span class="white-text">
-                    <i class="material-icons">info_outline</i> Welcome to the oSTEM admin dashboard. Here you can send newsletters, update mailing lists, and manage users. If you have any issues, contact Chase (<a href="mailto:mcmanning.1@osu.edu" class="white-text">mcmanning.1@osu.edu</a>) ASAP.
-                </span>
+            <div class="alert card-panel blue lighten-1 white-text">                    
+                <i class="material-icons">info_outline</i>
+                <p>
+                    Welcome to the oSTEM admin dashboard. Here you can send newsletters, update mailing lists, and manage users. If you have any issues, contact Chase (<a href="mailto:mcmanning.1@osu.edu" class="white-text">mcmanning.1@osu.edu</a>) ASAP.
+                </p>
+            </div>
+            <div class="alert card-panel red white-text">
+                <i class="material-icons">mood_bad</i>
+                <p>
+                    If you need an admin added, let Chase know. A tool will be coming... eventually.
+                </p>
             </div>
         </div>
     </div>
