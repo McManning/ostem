@@ -1,0 +1,25 @@
+    
+    <div class="card profile">
+        <div class="card-content">
+            <h1>My Profile</h1>
+
+            <form role="form" name="profile" id="profile">
+                <div class="input-field">
+                    <input id="email" type="email" name="email" value="{{ user.email }}" readonly>
+                </div>
+
+                <div class="input-field">
+                    <input id="password" type="password" name="password">
+                    <label for="password">New Password</label>
+                </div>
+
+                <div class="input-field">
+                    <input id="password2" type="password" name="password2">
+                    <label for="password2">New Password Again</label>
+                </div>
+
+                <button class="btn green" type="submit" name="submit">Save</button>
+            </form>
+        </div> <!-- .card-content -->
+    </div>
+    

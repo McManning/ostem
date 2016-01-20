@@ -255,8 +255,13 @@ $(function() {
     });
     
     if ($('#listserv').length > 0) {
-        var listservTable = $('#listserv').DataTable();
-
+        var listservTable = $('#listserv').DataTable({
+            dom: 'rtip',
+            columnDefs: [
+                { width: '20px', targets: 0 }
+            ]
+        });
+        
         $('#listserv-add').submit(function(e) {
             $.post('/subscribe', $(this).serialize())
                 .fail(function() {
@@ -292,5 +297,10 @@ $(function() {
             return false; 
         });
 
+        // Bind search box to update DataTables
+        $('#listserv-search').keyup(function() {
+            var dt = $('#listserv').DataTable();
+            dt.search($(this).val()).draw();
+        });
     }
 });

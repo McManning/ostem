@@ -12,74 +12,57 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col s12">
-        <h2><a href="/">oSTEM</a> Admin Dashboard</h2>
-        <h5>Logged in as {{ user.email }} <a href="/logout">(logout)</a></h5>
-        <div class="card-panel blue">
-            <span class="white-text">
-                <i class="material-icons">info_outline</i> Welcome to the oSTEM admin dashboard. Here you can send newsletters, update mailing lists, and manage users. If you have any issues, contact Chase (<a href="mailto:mcmanning.1@osu.edu" class="white-text">mcmanning.1@osu.edu</a>) ASAP.
-            </span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col s12 m12 l4">
-        <div class="card">
-            <div class="card-content">
-                <h1>My Profile</h1>
-
-                <form role="form" name="profile" id="profile">
-                    <div class="input-field">
-                        <input id="email" type="email" name="email" value="{{ user.email }}" readonly>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="password" type="password" name="password">
-                        <label for="password">New Password</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="password2" type="password" name="password2">
-                        <label for="password2">New Password Again</label>
-                    </div>
-
-                    <button class="btn green" type="submit" name="submit">Save</button>
-                </form>
-            </div> <!-- .card-content -->
-        </div>
-
-        <!--div class="card">
-            <div class="card-content">
-                <h1>Add Admin</h1>
-
-                <form role="form" name="add" id="add" action="/admin/add" method="post">
-                    <div class="input-field">
-                        <input id="admin-email" type="text" name="email" value="">
-                        <label for="admin-email">Email</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="admin-password" type="password" name="password">
-                        <label for="admin-password">Password</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="admin-password2" type="password" name="password2">
-                        <label for="admin-password2">Password Again</label>
-                    </div>
-
-                    <button class="btn green" type="submit" name="submit">Create</button>
-                </form>
+<div class="container admin-dashboard">
+    <div class="row">
+        <div class="col s12">
+            <h2>
+                <a href="/">oSTEM</a> Admin Dashboard
+                <div class="right"><img src="/img/email-logo.png"></div>
+            </h2>
+            <h5>Logged in as {{ user.email }} <a href="/logout">(logout)</a></h5>
+            <div class="card-panel blue">
+                <span class="white-text">
+                    <i class="material-icons">info_outline</i> Welcome to the oSTEM admin dashboard. Here you can send newsletters, update mailing lists, and manage users. If you have any issues, contact Chase (<a href="mailto:mcmanning.1@osu.edu" class="white-text">mcmanning.1@osu.edu</a>) ASAP.
+                </span>
             </div>
-        </div-->
+        </div>
     </div>
-    <div class="col s12 m12 l8">
-        
-        {% include 'admin/newsletter-editor.html.j2' %}
+    <div class="row">
+        <div class="col s12 m12 l4">
+            {% include 'admin/profile-editor.html.j2' %}
 
-        {% include 'admin/listserv-editor.html.j2' %}
+            <!--div class="card">
+                <div class="card-content">
+                    <h1>Add Admin</h1>
+
+                    <form role="form" name="add" id="add" action="/admin/add" method="post">
+                        <div class="input-field">
+                            <input id="admin-email" type="text" name="email" value="">
+                            <label for="admin-email">Email</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="admin-password" type="password" name="password">
+                            <label for="admin-password">Password</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="admin-password2" type="password" name="password2">
+                            <label for="admin-password2">Password Again</label>
+                        </div>
+
+                        <button class="btn green" type="submit" name="submit">Create</button>
+                    </form>
+                </div>
+            </div-->
+        </div>
+        <div class="col s12 m12 l8">
+            
+            {% include 'admin/newsletter-editor.html.j2' %}
+
+            {% include 'admin/listserv-editor.html.j2' %}
+        </div>
     </div>
-</div>
+</div> <!-- .container -->
 
 {% endblock %}

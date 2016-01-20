@@ -29,6 +29,7 @@ date_default_timezone_set('America/New_York');
 if (php_sapi_name() == 'cli-server') {
     define('DATA_DIR', dirname(__FILE__) . '/php-data/');
     define('LOG_DIR', dirname(__FILE__) . '/logs/');
+    define('DEBUG_MODE', false);
 
     $extensions = array('css', 'map', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'js', 'json');
     $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
@@ -44,16 +45,20 @@ if (php_sapi_name() == 'cli-server') {
 
 } else {
     // TODO: Not exposed in the script, jeeze. 
+    define('DEBUG_MODE', false);
     define('DATA_DIR', '/usr/local/webs/ostem/php-data/');
     define('LOG_DIR', '/usr/local/webs/ostem/php-data/logs/');
 }
 
 // App configurations
 $app = new \Slim\Slim(array(
-    'debug' => false,
+    'debug' => false, // Always false, let our custom handlers deal with error catching
     'view' => new \Slim\Views\Twig(),
     'log.enabled' => false
 ));
+
+// Let our views know whether or not we're in debug mode
+$app->view->appendData(array('debug' => DEBUG_MODE));
 
 // Replace Slim's logger with Monolog
 $app->container->singleton('log', function() {
@@ -152,8 +157,9 @@ $app->error(function (\Exception $e) use ($app) {
 
 // Additional error handling for other 404's 
 $app->notFound(function () use ($app) {
-
-    // Throw out the same crap Zend does for 404ing auth routes
+   
+    // Just let the error handler deal with it,
+    // since Zend will always throw on 404's anyway
     throw new InvalidArgumentException();
 });
 
