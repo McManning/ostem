@@ -257,11 +257,9 @@ $(function() {
     if ($('#listserv').length > 0) {
         var listservTable = $('#listserv').DataTable({
             dom: 'rtip',
-            columnDefs: [
-                { width: '20px', targets: 0 }
-            ]
+            responsive: true
         });
-        
+
         $('#listserv-add').submit(function(e) {
             $.post('/subscribe', $(this).serialize())
                 .fail(function() {
