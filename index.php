@@ -49,12 +49,15 @@ $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig()
 ));
 
-// Configure PDO Adapter for authentication
-$app->db = new \PDO('sqlite:' . DATA_DIR . 'ostem.db', null, null, array(
-    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-    \PDO::ATTR_EMULATE_PREPARES => true, // Required by Sqlite3
-    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-));
+// Configure shared PDO adapter
+$app->container->singleton('db', function() {
+    return new \PDO('sqlite:' . DATA_DIR . 'ostem.db', null, null, array(
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+        \PDO::ATTR_EMULATE_PREPARES => true, // Required by Sqlite3
+        \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+    ));
+});
+
 $adapter = new PdoAdapter(
     $app->db,
     'users',
