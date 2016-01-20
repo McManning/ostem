@@ -22,30 +22,25 @@ class Listserv {
         if (!$this->emails) {
             $this->emails = array();
             
-            try {
-                $statement = $this->db->prepare("
-                    SELECT
-                        id, uuid, email, date 
-                    FROM
-                        listserv
-                    ORDER BY 
-                        date ASC 
-                ");
+            $statement = $this->db->prepare("
+                SELECT
+                    id, uuid, email, date 
+                FROM
+                    listserv
+                ORDER BY 
+                    date ASC 
+            ");
 
-                $statement->execute();
-                $rows = $statement->fetchAll();
+            $statement->execute();
+            $rows = $statement->fetchAll();
 
-                foreach ($rows as $row) {
-                    $this->emails[] = (object)array(
-                        'id' => $row['id'],
-                        'uuid' => $row['uuid'],
-                        'email' => $row['email'],
-                        'date' => new \DateTime($row['date'])
-                    );
-                }
-            } catch (\PDOException $e) {
-                // die(sprintf('DB error: %s', $e->getMessage()));
-                // TODO: Log something
+            foreach ($rows as $row) {
+                $this->emails[] = (object)array(
+                    'id' => $row['id'],
+                    'uuid' => $row['uuid'],
+                    'email' => $row['email'],
+                    'date' => new \DateTime($row['date'])
+                );
             }
         }
 
@@ -62,27 +57,22 @@ class Listserv {
      */
     public function getEmail($uuid) 
     {
-        try {
-            $statement = $this->db->prepare("
-                SELECT
-                    email
-                FROM
-                    listserv
-                WHERE
-                    uuid = :uuid
-            ");
+        $statement = $this->db->prepare("
+            SELECT
+                email
+            FROM
+                listserv
+            WHERE
+                uuid = :uuid
+        ");
 
-            $statement->execute(array(
-                'uuid' => $uuid
-            ));
-            $rows = $statement->fetchAll();
+        $statement->execute(array(
+            'uuid' => $uuid
+        ));
+        $rows = $statement->fetchAll();
 
-            if (!empty($rows)) {
-                return $rows[0]['email'];
-            }
-        } catch (\PDOException $e) {
-            // die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
+        if (!empty($rows)) {
+            return $rows[0]['email'];
         }
 
         return '';
@@ -95,30 +85,22 @@ class Listserv {
      */
     public function isSubscribed($email)
     {
-        try {
-            $statement = $this->db->prepare("
-                SELECT 
-                    id
-                FROM
-                    listserv
-                WHERE
-                    email = :email
-                COLLATE NOCASE
-            ");
+        $statement = $this->db->prepare("
+            SELECT 
+                id
+            FROM
+                listserv
+            WHERE
+                email = :email
+            COLLATE NOCASE
+        ");
 
-            $statement->execute(array(
-                'email' => $email
-            ));
+        $statement->execute(array(
+            'email' => $email
+        ));
 
-            $rows = $statement->fetchAll();
-            return count($rows) > 0;
-
-        } catch (\PDOException $e) {
-            // die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
-
-            return false;
-        }
+        $rows = $statement->fetchAll();
+        return count($rows) > 0;
     }
 
     /**
@@ -130,12 +112,9 @@ class Listserv {
             $date = new \DateTime();
         }
 
-        // If they already subscribed, don't add duplicates
-        if ($this->isSubscribed($email)) {
-            return true;
-        }
+        // Only subscribe if we haven't already
+        if (!$this->isSubscribed($email)) {
 
-        try {
             $statement = $this->db->prepare("
                 INSERT INTO 
                     listserv (uuid, email, date)
@@ -148,12 +127,7 @@ class Listserv {
                 'email' => $email,
                 'date' => $date->format('Y-m-d H:i:s')
             ));
-        } catch (\PDOException $e) {
-            //die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
         }
-
-        return true;
     }
 
     /**
@@ -164,20 +138,15 @@ class Listserv {
      */
     public function unsubscribe($uuid)
     {
-        try {
-            $statement = $this->db->prepare("
-                DELETE FROM 
-                    listserv
-                WHERE
-                    uuid = :uuid
-            ");
+        $statement = $this->db->prepare("
+            DELETE FROM 
+                listserv
+            WHERE
+                uuid = :uuid
+        ");
 
-            $statement->execute(array(
-                'uuid' => $uuid
-            ));
-        } catch (\PDOException $e) {
-            // die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
-        }
+        $statement->execute(array(
+            'uuid' => $uuid
+        ));
     }
 }

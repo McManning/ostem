@@ -27,50 +27,41 @@ class Newsletter {
      */
     public function loadDraft()
     {
-        try {
-            $statement = $this->db->prepare("
-                SELECT
-                    id, subject, message, date, sender, term
-                FROM
-                    newsletters
-                WHERE
-                    CAST(sent AS INTEGER) = 0
-                ORDER BY 
-                    date DESC
-                LIMIT 1
-            ");
+        $statement = $this->db->prepare("
+            SELECT
+                id, subject, message, date, sender, term
+            FROM
+                newsletters
+            WHERE
+                CAST(sent AS INTEGER) = 0
+            ORDER BY 
+                date DESC
+            LIMIT 1
+        ");
 
-            $statement->execute();
-            $rows = $statement->fetchAll();
+        $statement->execute();
+        $rows = $statement->fetchAll();
 
-            // TODO: Move this empty set
-            if (empty($rows)) {
-                $this->id = null;
-                $this->subject = '';
-                $this->message = '';
-                $this->date = new \DateTime();
-                $this->term = 'TODO';
-                $this->sent = false;
-            } else {
-                $draft = (object)$rows[0];
+        // TODO: Move this empty set
+        if (empty($rows)) {
+            $this->id = null;
+            $this->subject = '';
+            $this->message = '';
+            $this->date = new \DateTime();
+            $this->term = 'TODO';
+            $this->sent = false;
+        } 
+        else {
+            $draft = (object)$rows[0];
 
-                $this->id = $draft->id;
-                $this->subject = $draft->subject;
-                $this->message = $draft->message;
-                $this->date = new \DateTime($draft->date);
-                $this->sender = $draft->sender;
-                $this->term = $draft->term;
-                $this->sent = false;
-            }
-
-
-        } catch (\PDOException $e) {
-            // die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
-            return false;
+            $this->id = $draft->id;
+            $this->subject = $draft->subject;
+            $this->message = $draft->message;
+            $this->date = new \DateTime($draft->date);
+            $this->sender = $draft->sender;
+            $this->term = $draft->term;
+            $this->sent = false;
         }
-
-        return true;
     }
 
     /**
@@ -83,56 +74,47 @@ class Newsletter {
         // Update date to now
         $this->date = new \DateTime();
 
-        try {
-            if ($this->id) {
-                $statement = $this->db->prepare("
-                    UPDATE 
-                        newsletters
-                    SET 
-                        subject=:subject,
-                        message=:message,
-                        date=:date,
-                        sender=:sender,
-                        term=:term,
-                        sent=:sent
-                    WHERE
-                        id=:id
-                ");
+        if ($this->id) {
+            $statement = $this->db->prepare("
+                UPDATE 
+                    newsletters
+                SET 
+                    subject=:subject,
+                    message=:message,
+                    date=:date,
+                    sender=:sender,
+                    term=:term,
+                    sent=:sent
+                WHERE
+                    id=:id
+            ");
 
-                $statement->execute(array(
-                    'id' => $this->id,
-                    'subject' => $this->subject,
-                    'message' => $this->message,
-                    'date' => $this->date->format('Y-m-d H:i:s'),
-                    'sender' => $this->sender,
-                    'term' => $this->term,
-                    'sent' => $this->sent
-                ));
-            } else {
-                $statement = $this->db->prepare("
-                    INSERT INTO  
-                        newsletters (subject, message, date, sender, term, sent)
-                    VALUES 
-                        (:subject, :message, :date, :sender, :term, :sent) 
-                ");
+            $statement->execute(array(
+                'id' => $this->id,
+                'subject' => $this->subject,
+                'message' => $this->message,
+                'date' => $this->date->format('Y-m-d H:i:s'),
+                'sender' => $this->sender,
+                'term' => $this->term,
+                'sent' => $this->sent
+            ));
+        } else {
+            $statement = $this->db->prepare("
+                INSERT INTO  
+                    newsletters (subject, message, date, sender, term, sent)
+                VALUES 
+                    (:subject, :message, :date, :sender, :term, :sent) 
+            ");
 
-                $statement->execute(array(
-                    'subject' => $this->subject,
-                    'message' => $this->message,
-                    'date' => $this->date->format('Y-m-d H:i:s'),
-                    'sender' => $this->sender,
-                    'term' => $this->term,
-                    'sent' => $this->sent
-                ));
-            }
-            
-        } catch (\PDOException $e) {
-            die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
-            return false;
+            $statement->execute(array(
+                'subject' => $this->subject,
+                'message' => $this->message,
+                'date' => $this->date->format('Y-m-d H:i:s'),
+                'sender' => $this->sender,
+                'term' => $this->term,
+                'sent' => $this->sent
+            ));
         }
-
-        return true;
     }
 
     /**
@@ -141,40 +123,33 @@ class Newsletter {
     public static function getRecent(\PDO $db)
     {
         $recent = array();
-        try {
-            $statement = $db->prepare("
-                SELECT
-                    id, subject, message, date, sender, term
-                FROM
-                    newsletters
-                WHERE
-                    sent = 1
-                ORDER BY 
-                    date DESC
-                LIMIT 5
-            ");
+        $statement = $db->prepare("
+            SELECT
+                id, subject, message, date, sender, term
+            FROM
+                newsletters
+            WHERE
+                sent = 1
+            ORDER BY 
+                date DESC
+            LIMIT 5
+        ");
 
-            $statement->execute();
-            $rows = $statement->fetchAll();
+        $statement->execute();
+        $rows = $statement->fetchAll();
 
-            foreach ($rows as $row) {
-                $draft = (object)$row;
+        foreach ($rows as $row) {
+            $draft = (object)$row;
 
-                $newsletter = new Newsletter($db);
-                $newsletter->id = $draft->id;
-                $newsletter->subject = $draft->subject;
-                $newsletter->message = $draft->message;
-                $newsletter->date = new \DateTime($draft->date);
-                $newsletter->sender = $draft->sender;
-                $newsletter->term = $draft->term;
-                $newsletter->sent = true;
-                $recent[] = $newsletter;
-            }
-
-        } catch (\PDOException $e) {
-            // die(sprintf('DB error: %s', $e->getMessage()));
-            // TODO: Log something
-            return $recent;
+            $newsletter = new Newsletter($db);
+            $newsletter->id = $draft->id;
+            $newsletter->subject = $draft->subject;
+            $newsletter->message = $draft->message;
+            $newsletter->date = new \DateTime($draft->date);
+            $newsletter->sender = $draft->sender;
+            $newsletter->term = $draft->term;
+            $newsletter->sent = true;
+            $recent[] = $newsletter;
         }
 
         return $recent;
