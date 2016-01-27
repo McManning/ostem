@@ -186,13 +186,13 @@ class Newsletter {
             if (DEBUG_MODE) {
                 file_put_contents('cache/email-' . $email->uuid . '.html', $body);
             }
-            
+
             // Configure outbound headers
             $headers = array();
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-            $headers[] = 'From: OSTEM at Ohio State <' . $this->sender . '>';
-            $headers[] = 'Subject: ' . $this->subject;
+            $headers[] = 'From: oSTEM at Ohio State <' . $this->sender . '>';
+            $headers[] = 'Subject: [oSTEM at Ohio State] ' . $this->subject;
             $headers[] = 'X-Mailer: PHP/' . phpversion();
 
             // Fire off using PHP mail() (not great for high volume, but tolerable right now)
