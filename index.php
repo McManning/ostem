@@ -29,7 +29,7 @@ date_default_timezone_set('America/New_York');
 if (php_sapi_name() == 'cli-server') {
     define('DATA_DIR', dirname(__FILE__) . '/php-data/');
     define('LOG_DIR', dirname(__FILE__) . '/logs/');
-    define('DEBUG_MODE', false);
+    define('DEBUG_MODE', true);
 
     $extensions = array('css', 'map', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'js', 'json');
     $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
