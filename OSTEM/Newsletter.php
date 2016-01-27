@@ -3,6 +3,8 @@
 namespace OSTEM;
 
 use OSTEM\Listserv;
+use Psr\Log\LoggerInterface;
+use Slim\View;
 
 class Newsletter {
     
@@ -156,15 +158,17 @@ class Newsletter {
     }
 
     /**
-     * Send this newsletter to the mailing list as-is
+     * Send this newsletter to a specific set of emails.
      *
-     * @param \Slim\View $view engine to render the email template
-     */ 
-    public function send(\Slim\View $view)
+     * Note that this does not mark the newsletter as sent. If this is to be 
+     * fired off to the whole listserv, that should be done in sendToListserv().
+     *
+     * @param Slim\View $view engine to render the email template
+     * @param array $emails array of objects in the form: { uuid: 'str', email: 'str' }
+     * @param Psr\Log\LoggerInterface $log target for logging failed emails 
+     */
+    public function send(View $view, array $emails, LoggerInterface $log)
     {
-        // Retrieve everyone on our listserv
-        $listserv = new Listserv($this->db);
-        $emails = $listserv->getEmails();
         $today = new \DateTime();
 
         // Send a personalized email to each person
@@ -179,12 +183,46 @@ class Newsletter {
                 'uuid' => $email->uuid
             ));
 
-            // TODO: Send to mailing list!
-            file_put_contents('cache/email-' . $email->uuid . '.html', $body);
-        }
+            if (DEBUG_MODE) {
+                file_put_contents('cache/email-' . $email->uuid . '.html', $body);
+            }
+            
+            // Configure outbound headers
+            $headers = array();
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+            $headers[] = 'From: OSTEM at Ohio State <' . $this->sender . '>';
+            $headers[] = 'Subject: ' . $this->subject;
+            $headers[] = 'X-Mailer: PHP/' . phpversion();
 
+            // Fire off using PHP mail() (not great for high volume, but tolerable right now)
+            if (!@mail($email->email, $this->subject, $body, implode("\r\n", $headers))) {
+
+                // If a message failed to send, log details for later investigation
+                $log->warning('Failed to send newsletter to recipient', (object)array(
+                    'to' => $email->email,
+                    'subject' => $subject
+                ));
+            };
+        }
+    }
+
+    /**
+     * Send this newsletter to the all of the listserv and mark it as sent
+     *
+     * @param Slim\View $view engine to render the email template
+     * @param OSTEM\Listserv $listserv to send emails to
+     * @param Psr\Log\LoggerInterface $log target for logging failed emails 
+     */ 
+    public function sendToListserv(View $view, Listserv $listserv, LoggerInterface $log)
+    {
+        // Retrieve everyone on our listserv
+        $emails = $listserv->getEmails();
+
+        $this->send($view, $emails, $log);
+
+        // Log it as being sent to the mailing list
         $this->sent = true;
         $this->save();
     }
-
 }
