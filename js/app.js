@@ -221,7 +221,61 @@ $(function() {
             e.preventDefault();
             return false;
         });
+
+        /**
+         * Send the newsletter draft to myself as a test
+         */
+        $('#newsletter .test').click(function(e) {
+            var $button = $(this);
+
+            if (!$button.hasClass('disabled')) {
+                if (editor.getText().trim().length < 1) {
+                    alert('You must enter some content!');
+                    e.preventDefault();
+                    return false;
+                }
+
+                if ($('#newsletter-subject').val().length < 1) {
+                    alert('You must specify a newsletter subject!');
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (confirm('Are you sure you want to send a test email to yourself?')) {
+                    // Clone HTML to a hidden input so we can submit it with the form
+                    $('#newsletter-html').val(editor.getHTML());
+
+                    $button
+                        .addClass('disabled')
+                        .html(
+                            '<span class="hide-on-med-and-down">' + 
+                            '<i class="material-icons left">send</i> </span>' + 
+                            'Sending...'
+                        );
+
+                    $.post('/admin/newsletter/test', 
+                            $('#newsletter').serialize()
+                        )
+                        .fail(function() {
+                            alert('An error has occurred!');
+                        })
+                        .done(function() {
+                            alert('Test newsletter has been sent! (Check your inbox)');
+                        })
+                        .always(function() {
+                            $button
+                                .removeClass('disabled')
+                                .html(
+                                    '<span class="hide-on-med-and-down">' + 
+                                    '<i class="material-icons left">send</i> </span>' + 
+                                    'Test'
+                                );
+                        });
+                }
             }
+
+            e.preventDefault();
+            return false;
         });
     }
 

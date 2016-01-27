@@ -215,19 +215,71 @@ $app->group('/admin', function () use ($app) {
         });
 
         /**
-         * AJAX POST: Send current newsletter draft out to all subscribers
+         * AJAX POST: Test send an email to a specific user (usually the author)
          */
-        $app->post('/send', function () use ($app) {
+        $app->post('/test', function () use ($app) {
             $user = $app->view->getData('user');
 
             try {
+                // Prepare newsletter
                 $newsletter = new OSTEM\Newsletter($app->db);
                 $newsletter->loadDraft();
                 $newsletter->message = $app->request->post('newsletter-html');
                 $newsletter->subject = $app->request->post('newsletter-subject');
                 $newsletter->sender = $user->email;
 
-                $newsletter->send($app->view);
+                // Fire off to just the current user 
+                $email = (object)array(
+                    'email' => $user->email,
+                    'uuid' => 'TEST-EMAIL-FAKE-UUID' // Fake UUID for unsubscribe links
+                );
+
+                $newsletter->send($app->view, array($email), $app->log);
+
+                $app->log->info('Newsletter test sent', array(
+                    'user' => $user->email,
+                    'ip' => $app->request->getIp(),
+                    'headers' => $app->request->headers()
+                ));
+
+                $app->response->setStatus(201);
+            } 
+            catch (\Exception $e) {
+
+                $app->log->error('Failed to send test newsletter', array(
+                    'user' => $user->email,
+                    'ip' => $app->request->getIp(),
+                    'headers' => $app->request->headers(),
+                    'exception' => (string)$e
+                ));
+
+                $app->contentType('application/json');
+                $app->halt(400, json_encode((object)array(
+                    'error' => $e->getMessage()
+                )));
+            }
+
+        });
+
+        /**
+         * AJAX POST: Send current newsletter draft out to all subscribers
+         */
+        $app->post('/send', function () use ($app) {
+            $user = $app->view->getData('user');
+
+            try {
+                // Prepare listserv
+                $listserv = new Listserv($this->db);
+
+                // Prepare newsletter
+                $newsletter = new OSTEM\Newsletter($app->db);
+                $newsletter->loadDraft();
+                $newsletter->message = $app->request->post('newsletter-html');
+                $newsletter->subject = $app->request->post('newsletter-subject');
+                $newsletter->sender = $user->email;
+
+                // Fire off to the listserv
+                $newsletter->sendToListserv($app->view, $listserv, $app->log);
 
                 $app->log->info('Newsletter sent', array(
                     'user' => $user->email,

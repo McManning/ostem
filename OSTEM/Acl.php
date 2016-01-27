@@ -30,6 +30,7 @@ class Acl extends ZendAcl
         $this->addResource('/admin/profile');
         $this->addResource('/admin/newsletter/draft');
         $this->addResource('/admin/newsletter/send');
+        $this->addResource('/admin/newsletter/test');
 
         $this->addResource('/subscribe');
         $this->addResource('/unsubscribe');
