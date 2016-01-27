@@ -1,83 +1,93 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>oSTEM at OSU</title>
 
-    body {
-        color: #606060;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-style: normal;
-        font-variant: normal;
-    }
+    <style type="text/css">
 
-    p, ul, ol {
-        margin: 0;
-    }
+        body {
+            /*color: #606060;*/
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-variant: normal;
+        }
 
-    a {
-        color: #2196F3;
-        text-decoration: none;
-    }
+        p, ul, ol {
+            margin: 0;
+        }
 
-    h1 {
-        font-weight: 500;
-        font-size: 40px;
-        display: inline;
-    }
-
-    .header {
-        min-height: 64px;
-        margin-bottom: 20px;
-    }
-
-    .header img {
-       float: right;
-    }
-
-    .footer {
-        font-style: italic;
-        font-size: 11px;
-        line-height: 20px;
-        margin-top: 20px;
-    }
-
-    .footer p {
-        margin: 0;
-    }
-
-    @media screen and (max-width: 600px) {
-        .header img {
-            float: none;
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 20px;
+        a {
+            /*color: #2196F3;*/
+            text-decoration: none;
         }
 
         h1 {
-            font-size: 30px;
+            font-weight: 500;
+            font-size: 40px;
+            display: inline;
         }
-    }
 
-</style> 
+        .header {
+            min-height: 64px;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+           float: right;
+        }
+
+        .footer {
+            font-style: italic;
+            font-size: 11px;
+            line-height: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #CCC;
+            padding-top: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            .header img {
+                float: none;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+
+    </style> 
 </head>
 <body>
+    <div class="header">
+        <img src="{{ baseUrl() }}/img/email-logo.png" alt="OSTEM at OSU">
+        <h1>{{ subject }}</h1>
+    </div>
 
-<img src="{{ baseUrl() }}/img/email-logo.png">
-<h1>{{ subject }}</h1>
+    <div class="content">
+        {{ message|raw }}
+    </div>
 
-<p>
-    {{ message|raw }}
-</p>
-
-<strong>Your e-mail address is kept confidential and never shared with other users.</strong>
-<p>
-    Copyright &copy; {{ today|date('Y') }} Out in Science, Technology, Engineering and Mathematics at The Ohio State University. All rights reserved.
-</p>
-<p>
-    To unsubscribe, go to
-    <a href="{{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}">
-        {{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}
-    </a>
-</p>
+    <div class="footer">
+        <strong>Your e-mail address is kept confidential and never shared with other users.</strong>
+        <p>
+            Copyright &copy; {{ today|date('Y') }} Out in Science, Technology, Engineering and Mathematics at The Ohio State University. All rights reserved.
+        </p>
+        <p>
+            To unsubscribe, go to
+            <a href="{{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}">
+                {{ baseUrl() }}{{ urlFor('unsubscribe', {'uuid': uuid}) }}
+            </a>
+        </p>
+    </div>
 </body>
 </html>
