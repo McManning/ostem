@@ -141,26 +141,33 @@ $(function() {
 
                     $button
                         .addClass('disabled')
-                        .html('<i class="material-icons">email</i> Sending...');
+                        .html(
+                            '<span class="hide-on-med-and-down">' + 
+                            '<i class="material-icons left">send</i> </span>' + 
+                            'Sending...'
+                        );
 
                     $.post('/admin/newsletter/send', 
                             $('#newsletter').serialize()
                         )
                         .fail(function() {
-                            $button
-                                .removeClass('disabled')
-                                .html('<i class="material-icons">send</i> Send Newsletter');
                             alert('An error has occurred!');
                         })
                         .done(function() {
-                            $button
-                                .removeClass('disabled')
-                                .html('<i class="material-icons">send</i> Send Newsletter');
                             editor.setHTML('');
                             $('#newsletter-html').val('');
                             $('#newsletter-subject').val('');
                             
                             alert('Newsletter has been sent!');
+                        })
+                        .always(function() {
+                            $button
+                                .removeClass('disabled')
+                                .html(
+                                    '<span class="hide-on-med-and-down">' + 
+                                    '<i class="material-icons left">send</i> </span>' + 
+                                    'Send'
+                                );
                         });
                 }
             }
@@ -185,10 +192,9 @@ $(function() {
                         $('#newsletter').serialize()
                     )
                     .fail(function() {
-                        $button.removeClass('disabled');
                         alert('An error occurred while saving!');
                     })
-                    .done(function() {
+                    .always(function() {
                         $button.removeClass('disabled');
                     });
             }
@@ -210,9 +216,11 @@ $(function() {
                     $('#newsletter').serialize()
                 );
                 // Silently ignore errors in clearing the draft
+            }
 
-                e.preventDefault();
-                return false;
+            e.preventDefault();
+            return false;
+        });
             }
         });
     }
@@ -254,6 +262,9 @@ $(function() {
         return false;
     });
     
+    /**
+     * Admin listserv editor
+     */
     if ($('#listserv').length > 0) {
         var listservTable = $('#listserv').DataTable({
             dom: 'rtip',
